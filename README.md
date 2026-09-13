@@ -6,6 +6,21 @@
 
 ---
 
+## Demo
+
+| Màn hình | Ảnh chụp |
+|----------|----------|
+| Đăng nhập | ![Login](docs/screenshots/01-login.png) |
+| Tổng quan (Chủ tịch) | ![Dashboard](docs/screenshots/02-dashboard.png) |
+| Danh sách hồ sơ | ![Requests](docs/screenshots/03-requests.png) |
+| Chi tiết hồ sơ + Workflow | ![Detail](docs/screenshots/04-request-detail.png) |
+| AI Tóm tắt & Kiểm tra | ![AI Features](docs/screenshots/05-ai-features.png) |
+| AI Chatbot | ![Chatbot](docs/screenshots/06-ai-chatbot.png) |
+| Báo cáo & Biểu đồ | ![Reports](docs/screenshots/07-reports.png) |
+| Quản trị hệ thống | ![Admin](docs/screenshots/08-admin.png) |
+
+---
+
 ## Tổng quan
 
 Hệ thống số hóa toàn bộ quy trình tạm ứng tài chính công đoàn — từ lúc đoàn viên tạo hồ sơ đề nghị cho đến khi hoàn tất chi tiền và lưu trữ. Thay thế quy trình giấy tờ thủ công bằng luồng xử lý trực tuyến có phân quyền, theo dõi trạng thái, và hỗ trợ AI.
@@ -144,6 +159,7 @@ quy-trinh-tam-ung/
 ├── db/
 │   └── init.sql             # Schema + triggers + sample data
 ├── docs/                    # Tài liệu tiếng Việt
+│   ├── screenshots/         # Ảnh chụp màn hình thật
 │   ├── quy-trinh-tam-ung.md
 │   ├── huong-dan-su-dung.md
 │   └── huong-dan-trien-khai.md
