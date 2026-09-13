@@ -55,7 +55,7 @@ app.use((err, _req, res, _next) => {
 async function autoInitDb() {
   const { pool } = require('./db');
   try {
-    const { rows } = await pool.query("SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'nguoi_dung')");
+    const { rows } = await pool.query("SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'profiles')");
     if (rows[0].exists) return;
     console.log('Database empty, running init.sql...');
     const initSql = path.join(__dirname, 'init.sql');
