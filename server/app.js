@@ -52,8 +52,26 @@ app.use((err, _req, res, _next) => {
   res.status(status).json({ error: message });
 });
 
-app.listen(PORT, '0.0.0.0', () => {
+async function autoInitDb() {
+  const { pool } = require('./db');
+  try {
+    const { rows } = await pool.query("SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'nguoi_dung')");
+    if (rows[0].exists) return;
+    console.log('Database empty, running init.sql...');
+    const initSql = path.join(__dirname, 'init.sql');
+    const fallback = path.join(__dirname, '..', 'db', 'init.sql');
+    const sqlPath = fs.existsSync(initSql) ? initSql : fallback;
+    if (!fs.existsSync(sqlPath)) { console.warn('init.sql not found, skipping'); return; }
+    await pool.query(fs.readFileSync(sqlPath, 'utf8'));
+    console.log('Database initialized successfully');
+  } catch (err) {
+    console.error('Auto-init DB error:', err.message);
+  }
+}
+
+app.listen(PORT, '0.0.0.0', async () => {
   console.log(`API server running on port ${PORT}`);
+  await autoInitDb();
 });
 
 module.exports = app;

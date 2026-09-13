@@ -14,9 +14,12 @@ async function initDb() {
     ssl: process.env.DB_SSL === 'false' ? false : { rejectUnauthorized: false },
   });
 
-  const sqlPath = path.join(__dirname, 'init.sql');
+  let sqlPath = path.join(__dirname, 'init.sql');
   if (!fs.existsSync(sqlPath)) {
-    console.error('init.sql not found at', sqlPath);
+    sqlPath = path.join(__dirname, '..', 'db', 'init.sql');
+  }
+  if (!fs.existsSync(sqlPath)) {
+    console.error('init.sql not found');
     process.exit(1);
   }
 
