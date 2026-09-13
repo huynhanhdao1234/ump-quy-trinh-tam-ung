@@ -1,0 +1,201 @@
+# Hệ thống Quản lý Tạm ứng Tài chính Công đoàn
+
+**CĐCS Đại học Y Dược TP. Hồ Chí Minh**
+
+> Sản phẩm dự thi **"Ứng dụng AI Tự động hóa Công việc tại ĐH Y Dược TP.HCM"**
+
+---
+
+## Tổng quan
+
+Hệ thống số hóa toàn bộ quy trình tạm ứng tài chính công đoàn — từ lúc đoàn viên tạo hồ sơ đề nghị cho đến khi hoàn tất chi tiền và lưu trữ. Thay thế quy trình giấy tờ thủ công bằng luồng xử lý trực tuyến có phân quyền, theo dõi trạng thái, và hỗ trợ AI.
+
+### Quy trình 6 bước
+
+```
+Tạo hồ sơ → Tiếp nhận → Kiểm tra → Phê duyệt → Chi tiền → Lưu trữ
+(Đoàn viên)  (Chuyên viên) (Kế toán)  (Chủ tịch)  (Thủ quỹ)  (Chuyên viên)
+```
+
+### 5 vai trò người dùng
+
+| Vai trò | Chức năng chính |
+|---------|----------------|
+| **Người đề nghị** | Tạo, theo dõi hồ sơ tạm ứng |
+| **Chuyên viên VPCĐ** | Tiếp nhận, kiểm tra đầu vào, lưu trữ |
+| **Kế toán CĐ** | Kiểm tra hợp lệ, xác nhận chi, báo cáo |
+| **Chủ tịch CĐCS** | Phê duyệt / từ chối, quản trị hệ thống |
+| **Thủ quỹ CĐ** | Xác nhận chi tiền, lập phiếu chi C41-BB |
+
+---
+
+## Chức năng AI (Google Gemini)
+
+Hệ thống tích hợp 4 chức năng AI, tất cả đều có **kiểm soát con người** — kết quả AI chỉ mang tính tham khảo, người dùng luôn xem xét và chỉnh sửa trước khi sử dụng.
+
+| # | Chức năng | Mô tả |
+|---|-----------|-------|
+| 1 | **AI Tóm tắt** | Tóm tắt nội dung hồ sơ: lý do, dự trù, trạng thái, lịch sử xử lý |
+| 2 | **AI Kiểm tra** | Phân tích hồ sơ, phát hiện bất thường, đánh giá tính hợp lệ |
+| 3 | **AI Gợi ý nhận xét** | Dự thảo nhận xét phê duyệt/từ chối phù hợp ngữ cảnh |
+| 4 | **AI Chatbot** | Tra cứu quy trình, quy định, thời hạn xử lý qua hội thoại |
+
+---
+
+## Công nghệ
+
+### Backend
+- **Runtime:** Node.js + Express.js
+- **Database:** PostgreSQL 17 (PL/pgSQL triggers, generated columns, custom enums)
+- **Auth:** JWT + bcryptjs
+- **AI:** Google Gemini API (`@google/generative-ai`)
+- **Security:** Helmet, CORS, role-based middleware
+
+### Frontend
+- **Framework:** Vue 3 (Composition API, `<script setup>`)
+- **UI:** Vuetify 4 (Material Design 3)
+- **Build:** Vite 8
+- **State:** Pinia
+- **Charts:** Chart.js + vue-chartjs
+- **Export:** xlsx + file-saver (Excel), jsPDF + jspdf-autotable (PDF, hỗ trợ tiếng Việt)
+
+### Infrastructure
+- **Container:** Docker Compose (PostgreSQL + API)
+- **DB Init:** Tự động tạo schema + dữ liệu mẫu 12 hồ sơ
+
+---
+
+## Cài đặt & Chạy
+
+### Yêu cầu
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (bao gồm Docker Compose)
+- [Node.js](https://nodejs.org/) >= 18
+- [Google Gemini API Key](https://aistudio.google.com/apikey) (cho chức năng AI)
+
+### Bước 1: Clone & cấu hình
+
+```bash
+git clone https://github.com/huynhanhdao1234/ump-quy-trinh-tam-ung.git
+cd ump-quy-trinh-tam-ung
+```
+
+Tạo file `.env` ở thư mục gốc:
+
+```env
+GEMINI_API_KEY=your-google-gemini-api-key
+```
+
+### Bước 2: Khởi động Backend (Docker)
+
+```bash
+docker compose up -d
+```
+
+Lệnh này sẽ:
+- Khởi tạo PostgreSQL 17 với schema + dữ liệu mẫu
+- Chạy API server trên cổng `3000`
+
+Kiểm tra: `docker compose ps` — cả 2 service `postgres` và `api` đều ở trạng thái `running`.
+
+### Bước 3: Khởi động Frontend
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+Truy cập: **http://localhost:5173**
+
+### Tài khoản demo
+
+| Vai trò | Email | Mật khẩu |
+|---------|-------|-----------|
+| Chủ tịch CĐCS | `bao.tq@ump.edu.vn` | `ct123456` |
+| Kế toán CĐ | `ha.ltt@ump.edu.vn` | `kt123456` |
+| Chuyên viên VPCĐ | `tuan.vm@ump.edu.vn` | `cv123456` |
+| Thủ quỹ CĐ | `ngan.dtk@ump.edu.vn` | `tq123456` |
+| Người đề nghị | `long.ph@ump.edu.vn` | `ky123456` |
+
+> Các tài khoản người đề nghị khác: mật khẩu chung `123456`
+
+---
+
+## Cấu trúc dự án
+
+```
+quy-trinh-tam-ung/
+├── client/                  # Vue 3 + Vuetify frontend
+│   ├── src/
+│   │   ├── api/             # HTTP client & API modules
+│   │   ├── components/      # UI components (AI cards, charts, chips...)
+│   │   ├── plugins/         # Vuetify config
+│   │   ├── router/          # Vue Router
+│   │   ├── stores/          # Pinia stores (auth, notifications)
+│   │   ├── utils/           # Constants, export helpers, money format
+│   │   └── views/           # Page components
+│   └── vite.config.js
+├── server/                  # Express.js API
+│   ├── middleware/           # JWT auth middleware
+│   ├── routes/              # REST API routes (13 modules)
+│   ├── app.js               # Entry point
+│   ├── db.js                # PostgreSQL connection pool
+│   └── Dockerfile
+├── db/
+│   └── init.sql             # Schema + triggers + sample data
+├── docs/                    # Tài liệu tiếng Việt
+│   ├── quy-trinh-tam-ung.md
+│   ├── huong-dan-su-dung.md
+│   └── huong-dan-trien-khai.md
+├── docker-compose.yml
+└── .env.example
+```
+
+---
+
+## Tính năng nổi bật
+
+- **Workflow trực quan** — Thanh tiến trình 6 bước hiển thị vị trí hồ sơ trong quy trình
+- **Thông báo realtime** — Database triggers tự động tạo thông báo khi hồ sơ chuyển trạng thái
+- **Xuất báo cáo** — Excel (.xlsx) và PDF (hỗ trợ đầy đủ tiếng Việt có dấu)
+- **Biểu đồ thống kê** — Dashboard và báo cáo với biểu đồ Doughnut phân bổ trạng thái
+- **Responsive** — Giao diện tương thích desktop và mobile
+- **Phân quyền nghiêm ngặt** — 5 vai trò, mỗi vai trò chỉ thấy menu và thao tác phù hợp
+- **Dữ liệu mẫu** — 12 hồ sơ ở 9 trạng thái khác nhau, sẵn sàng demo
+- **SLA cấu hình** — Chủ tịch có thể điều chỉnh thời hạn xử lý từng bước
+
+---
+
+## API Endpoints
+
+| Nhóm | Prefix | Mô tả |
+|------|--------|-------|
+| Auth | `/api/auth` | Đăng nhập, kiểm tra session |
+| Requests | `/api/requests` | CRUD hồ sơ tạm ứng |
+| Workflow | `/api/workflow` | Chuyển trạng thái hồ sơ |
+| Estimates | `/api/requests/:id/estimates` | Bảng dự trù kinh phí |
+| Sign List | `/api/requests/:id/signlist` | Danh sách ký nhận |
+| History | `/api/requests/:id/history` | Lịch sử xử lý |
+| Payments | `/api/requests/:id/payment` | Phiếu chi C41-BB |
+| Files | `/api/requests/:id/files` | Upload/download đính kèm |
+| Users | `/api/users` | Quản lý người dùng |
+| Units | `/api/units` | Quản lý đơn vị |
+| Notifications | `/api/notifications` | Thông báo |
+| Config | `/api/config` | Cấu hình SLA |
+| AI | `/api/ai` | 4 endpoints AI (Gemini) |
+
+---
+
+## Tài liệu
+
+| Tài liệu | File |
+|-----------|------|
+| Sơ đồ quy trình | [`docs/quy-trinh-tam-ung.md`](docs/quy-trinh-tam-ung.md) |
+| Hướng dẫn sử dụng | [`docs/huong-dan-su-dung.md`](docs/huong-dan-su-dung.md) |
+| Hướng dẫn triển khai | [`docs/huong-dan-trien-khai.md`](docs/huong-dan-trien-khai.md) |
+
+---
+
+## License
+
+Dự án phục vụ cuộc thi nội bộ tại Đại học Y Dược TP. Hồ Chí Minh.
