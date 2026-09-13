@@ -36,6 +36,15 @@ app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+const fs = require('fs');
+const clientDistDocker = path.join(__dirname, 'client-dist');
+const clientDistLocal = path.join(__dirname, '..', 'client', 'dist');
+const clientDist = fs.existsSync(clientDistDocker) ? clientDistDocker : clientDistLocal;
+app.use(express.static(clientDist));
+app.get(/^\/(?!api\/).*/, (_req, res) => {
+  res.sendFile(path.join(clientDist, 'index.html'));
+});
+
 app.use((err, _req, res, _next) => {
   console.error(err.stack || err);
   const status = err.status || 500;
