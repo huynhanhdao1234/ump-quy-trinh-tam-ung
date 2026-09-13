@@ -5,3 +5,4 @@ dist/
 .DS_Store
 uploads/
 .mcp.json
+.playwright-mcp/

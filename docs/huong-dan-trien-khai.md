@@ -44,11 +44,13 @@ quy-trinh-tam-ung/
 ├── db/
 │   └── init.sql           # Database schema + seed data
 ├── docs/                   # Tài liệu
+│   ├── screenshots/        # Ảnh chụp màn hình thật
 │   ├── quy-trinh-tam-ung.md
 │   ├── huong-dan-su-dung.md
-│   ├── huong-dan-trien-khai.md
-│   └── wireframes/
-├── docker-compose.yml      # Orchestration
+│   └── huong-dan-trien-khai.md
+├── Dockerfile              # Multi-stage build (Railway/Cloud)
+├── railway.toml            # Cấu hình Railway
+├── docker-compose.yml      # Orchestration (local)
 └── .env                    # Biến môi trường (tạo thủ công)
 ```
 
@@ -120,6 +122,7 @@ Mở trình duyệt tại: **http://localhost:8080**
 
 | Biến | Mô tả | Giá trị mặc định |
 |------|--------|-------------------|
+| `DATABASE_URL` | Connection string (Railway) | *(tự động từ Railway)* |
 | `DB_HOST` | Hostname PostgreSQL | `postgres` (Docker) |
 | `DB_PORT` | Port PostgreSQL | `5432` |
 | `DB_NAME` | Tên database | `tam_ung` |
@@ -173,7 +176,46 @@ docker exec -i postgres psql -U appuser -d tam_ung < backup_20260913_120000.sql
 
 ---
 
-## 6. Triển khai Production
+## 6. Triển khai lên Railway (Cloud)
+
+Railway cho phép triển khai miễn phí với PostgreSQL + Web service.
+
+### Bước 1: Chuẩn bị
+
+1. Tạo tài khoản [Railway](https://railway.app) (khuyến nghị đăng ký bằng GitHub)
+2. Fork hoặc push repo lên GitHub
+
+### Bước 2: Tạo project
+
+1. Vào Railway Dashboard → **New Project**
+2. **Add PostgreSQL** → Railway tạo database tự động
+3. **Add Service** → chọn **GitHub Repo** → chọn repo `ump-quy-trinh-tam-ung`
+
+### Bước 3: Cấu hình biến môi trường
+
+Chọn **web service** → tab **Variables** → thêm:
+
+| Biến | Giá trị |
+|------|---------|
+| `DATABASE_URL` | `${{Postgres.DATABASE_URL}}` *(reference variable)* |
+| `JWT_SECRET` | Chuỗi bí mật bất kỳ (32+ ký tự) |
+| `GEMINI_API_KEY` | API key từ [Google AI Studio](https://aistudio.google.com/apikey) |
+| `PORT` | `3000` |
+
+### Bước 4: Generate domain
+
+1. Web service → tab **Settings** → **Networking** → **Generate Domain**
+2. Railway cung cấp URL dạng: `https://web-production-xxxxx.up.railway.app`
+
+### Bước 5: Kiểm tra
+
+- Database tự khởi tạo schema + dữ liệu mẫu khi service khởi động lần đầu
+- Truy cập URL Railway → đăng nhập bằng tài khoản demo
+- Railway tự động redeploy mỗi khi push code lên GitHub
+
+---
+
+## 7. Triển khai Production (Self-hosted)
 
 ### Build frontend
 
@@ -220,7 +262,7 @@ server {
 
 ---
 
-## 7. An toàn dữ liệu
+## 8. An toàn dữ liệu
 
 Hệ thống được thiết kế với các biện pháp bảo mật sau:
 
@@ -257,7 +299,7 @@ Hệ thống được thiết kế với các biện pháp bảo mật sau:
 
 ---
 
-## 8. Xử lý sự cố
+## 9. Xử lý sự cố
 
 | Vấn đề | Nguyên nhân | Giải pháp |
 |--------|------------|-----------|

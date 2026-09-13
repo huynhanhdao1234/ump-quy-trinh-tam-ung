@@ -4,6 +4,8 @@
 
 > Sản phẩm dự thi **"Ứng dụng AI Tự động hóa Công việc tại ĐH Y Dược TP.HCM"**
 
+**Live Demo:** [https://web-production-404e7.up.railway.app](https://web-production-404e7.up.railway.app)
+
 ---
 
 ## Demo
@@ -75,8 +77,9 @@ Hệ thống tích hợp 4 chức năng AI, tất cả đều có **kiểm soát
 - **Export:** xlsx + file-saver (Excel), jsPDF + jspdf-autotable (PDF, hỗ trợ tiếng Việt)
 
 ### Infrastructure
-- **Container:** Docker Compose (PostgreSQL + API)
-- **DB Init:** Tự động tạo schema + dữ liệu mẫu 12 hồ sơ
+- **Local:** Docker Compose (PostgreSQL + API)
+- **Cloud:** Railway (PostgreSQL + Web service)
+- **DB Init:** Tự động tạo schema + dữ liệu mẫu 12 hồ sơ khi khởi động
 
 ---
 
@@ -121,6 +124,20 @@ npm run dev
 ```
 
 Truy cập: **http://localhost:5173**
+
+### Triển khai lên Railway (Cloud)
+
+1. Fork repo này trên GitHub
+2. Tạo tài khoản [Railway](https://railway.app) (đăng ký bằng GitHub)
+3. Tạo project mới → **Add PostgreSQL** database
+4. **Add Service** → chọn GitHub repo → Railway sẽ tự build bằng `Dockerfile`
+5. Thêm biến môi trường cho web service:
+   - `DATABASE_URL` → `${{Postgres.DATABASE_URL}}` (reference variable)
+   - `JWT_SECRET` → một chuỗi bí mật bất kỳ
+   - `GEMINI_API_KEY` → API key từ Google AI Studio
+   - `PORT` → `3000`
+6. **Generate Domain** → nhận URL public
+7. Database sẽ tự khởi tạo schema + dữ liệu mẫu khi service khởi động lần đầu
 
 ### Tài khoản demo
 
