@@ -835,25 +835,25 @@ BEGIN
   INSERT INTO profiles (ho_ten, email, password_hash, vai_tro, chuc_vu) VALUES
     ('CN. Đặng Thị Kim Ngân',    'ngan.dtk@ump.edu.vn',  crypt('tq123456', gen_salt('bf')), 'thu_quy', 'Thủ quỹ CĐ');
   INSERT INTO profiles (ho_ten, email, password_hash, vai_tro, don_vi_id, chuc_vu, don_vi_ten) VALUES
-    ('TS. Phạm Hoàng Long',      'long.ph@ump.edu.vn',   crypt('ky123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp01, 'CĐBP Trường Y', 'CĐBP Trường Y');
+    ('TS. Phạm Hoàng Long',      'long.ph@ump.edu.vn',   crypt('ky123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp01, 'Chủ tịch CĐBP', 'CĐBP Trường Y');
 
   -- 15 nguoi de nghi them (mat khau chung: 123456)
   INSERT INTO profiles (ho_ten, email, password_hash, vai_tro, don_vi_id, chuc_vu, don_vi_ten) VALUES
-    ('TS. Nguyễn Thị Mai Anh',   'anh.ntm@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp01, 'CĐBP Trường Y',                          'CĐBP Trường Y'),
-    ('ThS. Trần Văn Khoa',       'khoa.tv@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp02, 'CĐBP Khoa RHM',                           'CĐBP Khoa Răng Hàm Mặt'),
-    ('ThS. Lý Thanh Phương',     'phuong.lt@ump.edu.vn', crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp03, 'CĐBP Trường Dược',                        'CĐBP Trường Dược'),
-    ('PGS.TS. Huỳnh Văn Đạt',    'dat.hv@ump.edu.vn',    crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp04, 'CĐBP Khoa YTCC',                          'CĐBP Khoa Y tế công cộng'),
-    ('ThS. Ngô Thị Hương Giang', 'giang.nth@ump.edu.vn', crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp05, 'CĐBP Trường ĐD-KTYH',                     'CĐBP Trường Điều dưỡng - KTYH'),
-    ('TS. Phan Quốc Việt',       'viet.pq@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp06, 'CĐBP BV ĐHYD TPHCM',                      'CĐBP Bệnh viện ĐHYD TPHCM'),
-    ('ThS. Đỗ Thị Bích Ngọc',    'ngoc.dtb@ump.edu.vn',  crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp07, 'CĐBP Khoa YHCT',                           'CĐBP Khoa Y học cổ truyền'),
-    ('CN. Bùi Minh Châu',        'chau.bm@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp08, 'CĐBP Khoa KHCB',                           'CĐBP Khoa Khoa học cơ bản'),
-    ('ThS. Vương Thế Hùng',      'hung.vt@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp09, 'CĐBP KTX',                                 'CĐBP Ký túc xá'),
-    ('CN. Trịnh Thị Diệu Linh',  'linh.ttd@ump.edu.vn',  crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd01,  'Tổ CĐ P.HCTH',                            'Tổ CĐ Phòng Hành chính tổng hợp'),
-    ('ThS. Lâm Quang Minh',      'minh.lq@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd02,  'Tổ CĐ P.TTPC',                            'Tổ CĐ Phòng Thanh tra - Pháp chế'),
-    ('TS. Đinh Thị Thu Thảo',    'thao.dtt@ump.edu.vn',  crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd03,  'Tổ CĐ P.ĐTĐH',                            'Tổ CĐ Phòng Đào tạo đại học'),
-    ('CN. Hoàng Đức Thịnh',      'thinh.hd@ump.edu.vn',  crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd04,  'Tổ CĐ P.KHCN',                            'Tổ CĐ Phòng Khoa học công nghệ'),
-    ('ThS. Mai Xuân Trường',     'truong.mx@ump.edu.vn', crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd05,  'Tổ CĐ P.CTSV',                            'Tổ CĐ Phòng Công tác sinh viên'),
-    ('CN. Tạ Thị Mỹ Duyên',     'duyen.ttm@ump.edu.vn', crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd06,  'Tổ CĐ P.ĐTSĐH',                           'Tổ CĐ Phòng Đào tạo sau đại học');
+    ('TS. Nguyễn Thị Mai Anh',   'anh.ntm@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp01, 'Chủ tịch CĐBP',   'CĐBP Trường Y'),
+    ('ThS. Trần Văn Khoa',       'khoa.tv@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp02, 'Chủ tịch CĐBP',   'CĐBP Khoa Răng Hàm Mặt'),
+    ('ThS. Lý Thanh Phương',     'phuong.lt@ump.edu.vn', crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp03, 'Chủ tịch CĐBP',   'CĐBP Trường Dược'),
+    ('PGS.TS. Huỳnh Văn Đạt',    'dat.hv@ump.edu.vn',    crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp04, 'Chủ tịch CĐBP',   'CĐBP Khoa Y tế công cộng'),
+    ('ThS. Ngô Thị Hương Giang', 'giang.nth@ump.edu.vn', crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp05, 'Chủ tịch CĐBP',   'CĐBP Trường Điều dưỡng - KTYH'),
+    ('TS. Phan Quốc Việt',       'viet.pq@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp06, 'Chủ tịch CĐBP',   'CĐBP Bệnh viện ĐHYD TPHCM'),
+    ('ThS. Đỗ Thị Bích Ngọc',    'ngoc.dtb@ump.edu.vn',  crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp07, 'Chủ tịch CĐBP',   'CĐBP Khoa Y học cổ truyền'),
+    ('CN. Bùi Minh Châu',        'chau.bm@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp08, 'Chủ tịch CĐBP',   'CĐBP Khoa Khoa học cơ bản'),
+    ('ThS. Vương Thế Hùng',      'hung.vt@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp09, 'Chủ tịch CĐBP',   'CĐBP Ký túc xá'),
+    ('CN. Trịnh Thị Diệu Linh',  'linh.ttd@ump.edu.vn',  crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd01,  'Tổ trưởng CĐ',   'Tổ CĐ Phòng Hành chính tổng hợp'),
+    ('ThS. Lâm Quang Minh',      'minh.lq@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd02,  'Tổ trưởng CĐ',   'Tổ CĐ Phòng Thanh tra - Pháp chế'),
+    ('TS. Đinh Thị Thu Thảo',    'thao.dtt@ump.edu.vn',  crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd03,  'Tổ trưởng CĐ',   'Tổ CĐ Phòng Đào tạo đại học'),
+    ('CN. Hoàng Đức Thịnh',      'thinh.hd@ump.edu.vn',  crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd04,  'Tổ trưởng CĐ',   'Tổ CĐ Phòng Khoa học công nghệ'),
+    ('ThS. Mai Xuân Trường',     'truong.mx@ump.edu.vn', crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd05,  'Tổ trưởng CĐ',   'Tổ CĐ Phòng Công tác sinh viên'),
+    ('CN. Tạ Thị Mỹ Duyên',     'duyen.ttm@ump.edu.vn', crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd06,  'Tổ trưởng CĐ',   'Tổ CĐ Phòng Đào tạo sau đại học');
 END;
 $$;
 

@@ -16,6 +16,7 @@ COPY server/ .
 COPY --from=client-build /app/client/dist ./client-dist
 COPY db/init.sql ./init.sql
 COPY db/migrate-unit-names.sql ./migrate-unit-names.sql
+COPY db/migrate-positions.sql ./migrate-positions.sql
 
 RUN mkdir -p uploads
 
