@@ -46,6 +46,46 @@ Tạo hồ sơ → Tiếp nhận → Kiểm tra → Phê duyệt → Chi tiền 
 
 ---
 
+## Cơ cấu tổ chức Công đoàn
+
+### 9 Công đoàn Bộ phận (CĐBP)
+
+| Mã | Tên đơn vị |
+|----|-----------|
+| CDBP-01 | CĐBP Trường Y |
+| CDBP-02 | CĐBP Khoa Răng Hàm Mặt |
+| CDBP-03 | CĐBP Trường Dược |
+| CDBP-04 | CĐBP Khoa Y tế công cộng |
+| CDBP-05 | CĐBP Trường Điều dưỡng - KTYH |
+| CDBP-06 | CĐBP Bệnh viện ĐHYD TPHCM |
+| CDBP-07 | CĐBP Khoa Y học cổ truyền |
+| CDBP-08 | CĐBP Khoa Khoa học cơ bản |
+| CDBP-09 | CĐBP Ký túc xá |
+
+### 17 Tổ Công đoàn (Tổ CĐ)
+
+| Mã | Tên đơn vị |
+|----|-----------|
+| TCD-01 | Tổ CĐ Phòng Hành chính tổng hợp |
+| TCD-02 | Tổ CĐ Phòng Thanh tra - Pháp chế |
+| TCD-03 | Tổ CĐ Phòng Đào tạo đại học |
+| TCD-04 | Tổ CĐ Phòng Khoa học công nghệ |
+| TCD-05 | Tổ CĐ Phòng Công tác sinh viên |
+| TCD-06 | Tổ CĐ Phòng Đào tạo sau đại học |
+| TCD-07 | Tổ CĐ Phòng Đảm bảo chất lượng giáo dục và Khảo thí |
+| TCD-08 | Tổ CĐ Phòng Hợp tác quốc tế |
+| TCD-09 | Tổ CĐ Phòng Tổ chức cán bộ |
+| TCD-10 | Tổ CĐ Phòng Kế hoạch tài chính |
+| TCD-11 | Tổ CĐ Phòng Quản trị giáo tài |
+| TCD-12 | Tổ CĐ Trung tâm Công nghệ thông tin |
+| TCD-13 | Tổ CĐ Trung tâm Y sinh học phân tử |
+| TCD-14 | Tổ CĐ Trung tâm Kiểm chuẩn chất lượng xét nghiệm y học |
+| TCD-15 | Tổ CĐ Trung tâm Giáo dục Y học - Phẫu thuật thực nghiệm |
+| TCD-16 | Tổ CĐ Thư viện - Tạp chí y học |
+| TCD-17 | Tổ CĐ Trung tâm Đào tạo nhân lực y tế theo nhu cầu xã hội |
+
+---
+
 ## Chức năng AI (Google Gemini)
 
 Hệ thống tích hợp 4 chức năng AI, tất cả đều có **kiểm soát con người** — kết quả AI chỉ mang tính tham khảo, người dùng luôn xem xét và chỉnh sửa trước khi sử dụng.
@@ -194,6 +234,7 @@ quy-trinh-tam-ung/
 - **Biểu đồ thống kê** — Dashboard và báo cáo với biểu đồ Doughnut phân bổ trạng thái
 - **Responsive** — Giao diện tương thích desktop và mobile
 - **Phân quyền nghiêm ngặt** — 5 vai trò, mỗi vai trò chỉ thấy menu và thao tác phù hợp
+- **Quản lý đơn vị** — 9 CĐBP + 17 Tổ CĐ, hiển thị đơn vị trên hồ sơ và tài khoản người dùng
 - **Dữ liệu mẫu** — 12 hồ sơ ở 9 trạng thái khác nhau, sẵn sàng demo
 - **SLA cấu hình** — Chủ tịch có thể điều chỉnh thời hạn xử lý từng bước
 
