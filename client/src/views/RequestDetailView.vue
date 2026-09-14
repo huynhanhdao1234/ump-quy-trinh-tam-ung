@@ -80,27 +80,6 @@ function formatDate(dt) {
   return new Date(dt).toLocaleString('vi-VN')
 }
 
-function addWorkingDays(date, days) {
-  const result = new Date(date)
-  let added = 0
-  while (added < days) {
-    result.setDate(result.getDate() + 1)
-    const dow = result.getDay()
-    if (dow !== 0 && dow !== 6) added++
-  }
-  return result
-}
-
-const deadline = computed(() => {
-  if (!request.value?.created_at) return null
-  return addWorkingDays(new Date(request.value.created_at), 11)
-})
-
-const isOverdue = computed(() => {
-  if (!deadline.value || !request.value) return false
-  if (['hoan_tat', 'tu_choi'].includes(request.value.trang_thai)) return false
-  return new Date() > deadline.value
-})
 </script>
 
 <template>
@@ -189,15 +168,8 @@ const isOverdue = computed(() => {
                         <td class="text-medium-emphasis">Ngày tạo</td>
                         <td>{{ formatDate(request.created_at) }}</td>
                       </tr>
-                      <tr v-if="deadline">
-                        <td class="text-medium-emphasis">Hạn hoàn tất (SLA)</td>
-                        <td :class="isOverdue ? 'font-weight-medium text-error' : 'text-medium-emphasis'">
-                          {{ deadline.toLocaleDateString('vi-VN') }}
-                          <v-chip v-if="isOverdue" color="error" size="x-small" class="ml-2">Quá hạn</v-chip>
-                        </td>
-                      </tr>
                       <tr v-if="request.trang_thai === 'hoan_tat'">
-                        <td class="text-medium-emphasis">Ngày hoàn tất</td>
+                        <td class="text-medium-emphasis">Ngày hoàn thành</td>
                         <td class="font-weight-medium text-success">{{ formatDate(request.updated_at) }}</td>
                       </tr>
                     </tbody>
