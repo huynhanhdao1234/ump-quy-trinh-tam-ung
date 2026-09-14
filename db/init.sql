@@ -742,32 +742,32 @@ LEFT JOIN ho_so_tam_ung hs ON hs.id = tb.ho_so_id;
 -- 8.1 Don vi — 9 CDBP + 17 To CD (26 don vi)
 -- ----------------------------------------------------------------------------
 INSERT INTO don_vi (ma_don_vi, ten_don_vi, loai_don_vi, so_doan_vien) VALUES
-  ('CDBP-01', 'CĐ Khoa Y', 'CDBP', 150),
-  ('CDBP-02', 'CĐ Khoa Răng Hàm Mặt', 'CDBP', 80),
-  ('CDBP-03', 'CĐ Khoa Dược', 'CDBP', 120),
-  ('CDBP-04', 'CĐ Khoa Y tế Công cộng', 'CDBP', 60),
-  ('CDBP-05', 'CĐ Khoa Điều dưỡng - KTYH', 'CDBP', 90),
-  ('CDBP-06', 'CĐ Bệnh viện ĐH Y Dược', 'CDBP', 200),
-  ('CDBP-07', 'CĐ Phòng Tổ chức Cán bộ', 'CDBP', 15),
-  ('CDBP-08', 'CĐ Phòng Kế hoạch Tài chính', 'CDBP', 20),
-  ('CDBP-09', 'CĐ Phòng Đào tạo Đại học', 'CDBP', 18),
-  ('TCD-01', 'Tổ CĐ Phòng KH Công nghệ', 'ToCD', 12),
-  ('TCD-02', 'Tổ CĐ Phòng Quản lý Chất lượng', 'ToCD', 10),
-  ('TCD-03', 'Tổ CĐ Trung tâm CNTT', 'ToCD', 15),
-  ('TCD-04', 'Tổ CĐ Phòng Công tác CT', 'ToCD', 8),
-  ('TCD-05', 'Tổ CĐ Phòng Cơ sở Vật chất', 'ToCD', 25),
-  ('TCD-06', 'Tổ CĐ Phòng Hành chính TH', 'ToCD', 14),
-  ('TCD-07', 'Tổ CĐ Phòng ĐT Sau đại học', 'ToCD', 16),
-  ('TCD-08', 'Tổ CĐ Phòng Hợp tác QT', 'ToCD', 10),
-  ('TCD-09', 'Tổ CĐ Trung tâm Khảo thí', 'ToCD', 12),
-  ('TCD-10', 'Tổ CĐ Thư viện', 'ToCD', 20),
-  ('TCD-11', 'Tổ CĐ BM Nội', 'ToCD', 30),
-  ('TCD-12', 'Tổ CĐ BM Ngoại', 'ToCD', 28),
-  ('TCD-13', 'Tổ CĐ BM Sản', 'ToCD', 22),
-  ('TCD-14', 'Tổ CĐ BM Nhi', 'ToCD', 18),
-  ('TCD-15', 'Tổ CĐ BM Mắt', 'ToCD', 10),
-  ('TCD-16', 'Tổ CĐ BM Tai Mũi Họng', 'ToCD', 12),
-  ('TCD-17', 'Tổ CĐ BM Y học Cổ truyền', 'ToCD', 14);
+  ('CDBP-01', 'CĐBP Trường Y', 'CDBP', 150),
+  ('CDBP-02', 'CĐBP Khoa Răng Hàm Mặt', 'CDBP', 80),
+  ('CDBP-03', 'CĐBP Trường Dược', 'CDBP', 120),
+  ('CDBP-04', 'CĐBP Khoa Y tế công cộng', 'CDBP', 60),
+  ('CDBP-05', 'CĐBP Trường Điều dưỡng - KTYH', 'CDBP', 90),
+  ('CDBP-06', 'CĐBP Bệnh viện ĐHYD TPHCM', 'CDBP', 200),
+  ('CDBP-07', 'CĐBP Khoa Y học cổ truyền', 'CDBP', 15),
+  ('CDBP-08', 'CĐBP Khoa Khoa học cơ bản', 'CDBP', 20),
+  ('CDBP-09', 'CĐBP Ký túc xá', 'CDBP', 18),
+  ('TCD-01', 'Tổ CĐ Phòng Hành chính tổng hợp', 'ToCD', 14),
+  ('TCD-02', 'Tổ CĐ Phòng Thanh tra - Pháp chế', 'ToCD', 10),
+  ('TCD-03', 'Tổ CĐ Phòng Đào tạo đại học', 'ToCD', 18),
+  ('TCD-04', 'Tổ CĐ Phòng Khoa học công nghệ', 'ToCD', 12),
+  ('TCD-05', 'Tổ CĐ Phòng Công tác sinh viên', 'ToCD', 8),
+  ('TCD-06', 'Tổ CĐ Phòng Đào tạo sau đại học', 'ToCD', 16),
+  ('TCD-07', 'Tổ CĐ Phòng Đảm bảo chất lượng giáo dục và Khảo thí', 'ToCD', 12),
+  ('TCD-08', 'Tổ CĐ Phòng Hợp tác quốc tế', 'ToCD', 10),
+  ('TCD-09', 'Tổ CĐ Phòng Tổ chức cán bộ', 'ToCD', 15),
+  ('TCD-10', 'Tổ CĐ Phòng Kế hoạch tài chính', 'ToCD', 20),
+  ('TCD-11', 'Tổ CĐ Phòng Quản trị giáo tài', 'ToCD', 25),
+  ('TCD-12', 'Tổ CĐ Trung tâm Công nghệ thông tin', 'ToCD', 15),
+  ('TCD-13', 'Tổ CĐ Trung tâm Y sinh học phân tử', 'ToCD', 22),
+  ('TCD-14', 'Tổ CĐ Trung tâm Kiểm chuẩn chất lượng xét nghiệm y học', 'ToCD', 18),
+  ('TCD-15', 'Tổ CĐ Trung tâm Giáo dục Y học - Phẫu thuật thực nghiệm', 'ToCD', 10),
+  ('TCD-16', 'Tổ CĐ Thư viện - Tạp chí y học', 'ToCD', 20),
+  ('TCD-17', 'Tổ CĐ Trung tâm Đào tạo nhân lực y tế theo nhu cầu xã hội', 'ToCD', 14);
 
 -- ----------------------------------------------------------------------------
 -- 8.2 Cau hinh SLA mac dinh
@@ -835,25 +835,25 @@ BEGIN
   INSERT INTO profiles (ho_ten, email, password_hash, vai_tro, chuc_vu) VALUES
     ('CN. Đặng Thị Kim Ngân',    'ngan.dtk@ump.edu.vn',  crypt('tq123456', gen_salt('bf')), 'thu_quy', 'Thủ quỹ CĐ');
   INSERT INTO profiles (ho_ten, email, password_hash, vai_tro, don_vi_id, chuc_vu, don_vi_ten) VALUES
-    ('TS. Phạm Hoàng Long',      'long.ph@ump.edu.vn',   crypt('ky123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp01, 'CĐ Khoa Y', 'CĐ Khoa Y');
+    ('TS. Phạm Hoàng Long',      'long.ph@ump.edu.vn',   crypt('ky123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp01, 'CĐBP Trường Y', 'CĐBP Trường Y');
 
   -- 15 nguoi de nghi them (mat khau chung: 123456)
   INSERT INTO profiles (ho_ten, email, password_hash, vai_tro, don_vi_id, chuc_vu, don_vi_ten) VALUES
-    ('TS. Nguyễn Thị Mai Anh',   'anh.ntm@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp01, 'CĐ Khoa Y',          'CĐ Khoa Y'),
-    ('ThS. Trần Văn Khoa',       'khoa.tv@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp02, 'CĐ Khoa RHM',         'CĐ Khoa Răng Hàm Mặt'),
-    ('ThS. Lý Thanh Phương',     'phuong.lt@ump.edu.vn', crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp03, 'CĐ Khoa Dược',        'CĐ Khoa Dược'),
-    ('PGS.TS. Huỳnh Văn Đạt',    'dat.hv@ump.edu.vn',    crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp04, 'CĐ Khoa YTCC',        'CĐ Khoa Y tế Công cộng'),
-    ('ThS. Ngô Thị Hương Giang', 'giang.nth@ump.edu.vn', crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp05, 'CĐ Khoa ĐD-KTYH',     'CĐ Khoa Điều dưỡng - KTYH'),
-    ('TS. Phan Quốc Việt',       'viet.pq@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp06, 'CĐ BV ĐH Y Dược',     'CĐ Bệnh viện ĐH Y Dược'),
-    ('ThS. Đỗ Thị Bích Ngọc',    'ngoc.dtb@ump.edu.vn',  crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp07, 'CĐ Phòng TCCB',       'CĐ Phòng Tổ chức Cán bộ'),
-    ('CN. Bùi Minh Châu',        'chau.bm@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp08, 'CĐ Phòng KHTC',       'CĐ Phòng Kế hoạch Tài chính'),
-    ('ThS. Vương Thế Hùng',      'hung.vt@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp09, 'CĐ Phòng ĐTĐH',       'CĐ Phòng Đào tạo Đại học'),
-    ('CN. Trịnh Thị Diệu Linh',  'linh.ttd@ump.edu.vn',  crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd01,  'Tổ CĐ P.KHCN',        'Tổ CĐ Phòng KH Công nghệ'),
-    ('ThS. Lâm Quang Minh',      'minh.lq@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd02,  'Tổ CĐ P.QLCL',        'Tổ CĐ Phòng Quản lý Chất lượng'),
-    ('TS. Đinh Thị Thu Thảo',    'thao.dtt@ump.edu.vn',  crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd03,  'Tổ CĐ TT.CNTT',       'Tổ CĐ Trung tâm CNTT'),
-    ('CN. Hoàng Đức Thịnh',      'thinh.hd@ump.edu.vn',  crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd04,  'Tổ CĐ P.CTCT',        'Tổ CĐ Phòng Công tác CT'),
-    ('ThS. Mai Xuân Trường',     'truong.mx@ump.edu.vn', crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd05,  'Tổ CĐ P.CSVC',        'Tổ CĐ Phòng Cơ sở Vật chất'),
-    ('CN. Tạ Thị Mỹ Duyên',     'duyen.ttm@ump.edu.vn', crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd06,  'Tổ CĐ P.HCTH',        'Tổ CĐ Phòng Hành chính TH');
+    ('TS. Nguyễn Thị Mai Anh',   'anh.ntm@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp01, 'CĐBP Trường Y',                          'CĐBP Trường Y'),
+    ('ThS. Trần Văn Khoa',       'khoa.tv@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp02, 'CĐBP Khoa RHM',                           'CĐBP Khoa Răng Hàm Mặt'),
+    ('ThS. Lý Thanh Phương',     'phuong.lt@ump.edu.vn', crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp03, 'CĐBP Trường Dược',                        'CĐBP Trường Dược'),
+    ('PGS.TS. Huỳnh Văn Đạt',    'dat.hv@ump.edu.vn',    crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp04, 'CĐBP Khoa YTCC',                          'CĐBP Khoa Y tế công cộng'),
+    ('ThS. Ngô Thị Hương Giang', 'giang.nth@ump.edu.vn', crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp05, 'CĐBP Trường ĐD-KTYH',                     'CĐBP Trường Điều dưỡng - KTYH'),
+    ('TS. Phan Quốc Việt',       'viet.pq@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp06, 'CĐBP BV ĐHYD TPHCM',                      'CĐBP Bệnh viện ĐHYD TPHCM'),
+    ('ThS. Đỗ Thị Bích Ngọc',    'ngoc.dtb@ump.edu.vn',  crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp07, 'CĐBP Khoa YHCT',                           'CĐBP Khoa Y học cổ truyền'),
+    ('CN. Bùi Minh Châu',        'chau.bm@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp08, 'CĐBP Khoa KHCB',                           'CĐBP Khoa Khoa học cơ bản'),
+    ('ThS. Vương Thế Hùng',      'hung.vt@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_cdbp09, 'CĐBP KTX',                                 'CĐBP Ký túc xá'),
+    ('CN. Trịnh Thị Diệu Linh',  'linh.ttd@ump.edu.vn',  crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd01,  'Tổ CĐ P.HCTH',                            'Tổ CĐ Phòng Hành chính tổng hợp'),
+    ('ThS. Lâm Quang Minh',      'minh.lq@ump.edu.vn',   crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd02,  'Tổ CĐ P.TTPC',                            'Tổ CĐ Phòng Thanh tra - Pháp chế'),
+    ('TS. Đinh Thị Thu Thảo',    'thao.dtt@ump.edu.vn',  crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd03,  'Tổ CĐ P.ĐTĐH',                            'Tổ CĐ Phòng Đào tạo đại học'),
+    ('CN. Hoàng Đức Thịnh',      'thinh.hd@ump.edu.vn',  crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd04,  'Tổ CĐ P.KHCN',                            'Tổ CĐ Phòng Khoa học công nghệ'),
+    ('ThS. Mai Xuân Trường',     'truong.mx@ump.edu.vn', crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd05,  'Tổ CĐ P.CTSV',                            'Tổ CĐ Phòng Công tác sinh viên'),
+    ('CN. Tạ Thị Mỹ Duyên',     'duyen.ttm@ump.edu.vn', crypt('123456', gen_salt('bf')), 'nguoi_de_nghi', v_tcd06,  'Tổ CĐ P.ĐTSĐH',                           'Tổ CĐ Phòng Đào tạo sau đại học');
 END;
 $$;
 
@@ -949,7 +949,7 @@ BEGIN
     (v_hs01, 6, 'Hoàn tất',      v_ketoan,     'ThS. Lê Thị Thanh Hà',        'Đã lưu hồ sơ',                        NOW() - INTERVAL '35 days');
 
   INSERT INTO phieu_chi (ma_phieu_chi, ho_so_id, quyen_so, ngay_chi, nguoi_nhan, don_vi_nhan, noi_dung, so_tien, bang_chu, hinh_thuc, nguoi_tao_id)
-  VALUES ('PC-2026-0001', v_hs01, '01', (NOW() - INTERVAL '38 days')::DATE, 'TS. Phạm Hoàng Long', 'CĐ Khoa Y', 'Tổ chức Hội thảo Khoa học thường niên Khoa Y', 14500000, 'Mười bốn triệu năm trăm nghìn đồng', 'tien_mat', v_thuquy);
+  VALUES ('PC-2026-0001', v_hs01, '01', (NOW() - INTERVAL '38 days')::DATE, 'TS. Phạm Hoàng Long', 'CĐBP Trường Y', 'Tổ chức Hội thảo Khoa học thường niên Khoa Y', 14500000, 'Mười bốn triệu năm trăm nghìn đồng', 'tien_mat', v_thuquy);
 
   -- =========================================================================
   -- HS 02: TU-2026-0002 | Hoang Minh Duc | Tham doan vien | 5M | da_chi
@@ -974,7 +974,7 @@ BEGIN
     (v_hs02, 5, 'Đã chi',        v_thuquy,     'CN. Đặng Thị Kim Ngân',         'Chi tiền mặt theo phiếu chi',          NOW() - INTERVAL '24 days');
 
   INSERT INTO phieu_chi (ma_phieu_chi, ho_so_id, quyen_so, ngay_chi, nguoi_nhan, don_vi_nhan, noi_dung, so_tien, bang_chu, hinh_thuc, nguoi_tao_id)
-  VALUES ('PC-2026-0002', v_hs02, '01', (NOW() - INTERVAL '24 days')::DATE, 'TS. Nguyễn Thị Mai Anh', 'CĐ Khoa Y', 'Thăm hỏi đoàn viên ốm đau dài ngày', 5000000, 'Năm triệu đồng', 'tien_mat', v_thuquy);
+  VALUES ('PC-2026-0002', v_hs02, '01', (NOW() - INTERVAL '24 days')::DATE, 'TS. Nguyễn Thị Mai Anh', 'CĐBP Trường Y', 'Thăm hỏi đoàn viên ốm đau dài ngày', 5000000, 'Năm triệu đồng', 'tien_mat', v_thuquy);
 
   -- =========================================================================
   -- HS 03: TU-2026-0003 | Ngo Thi Hoa | To chuc 8/3 | 8M | da_duyet
@@ -1120,7 +1120,7 @@ BEGIN
     (v_hs10, 5, 'Đã chi',        v_thuquy,     'CN. Đặng Thị Kim Ngân',         'Chuyển khoản',                         NOW() - INTERVAL '27 days');
 
   INSERT INTO phieu_chi (ma_phieu_chi, ho_so_id, quyen_so, ngay_chi, nguoi_nhan, don_vi_nhan, noi_dung, so_tien, bang_chu, hinh_thuc, ngan_hang, so_tai_khoan, ten_tai_khoan, nguoi_tao_id)
-  VALUES ('PC-2026-0003', v_hs10, '01', (NOW() - INTERVAL '27 days')::DATE, 'ThS. Vương Thế Hùng', 'CĐ Phòng ĐTĐH', 'Tổ chức Hội nghị tổng kết hoạt động CĐ', 17000000, 'Mười bảy triệu đồng', 'chuyen_khoan', 'Vietcombank', '0123456789', 'Vương Thế Hùng', v_thuquy);
+  VALUES ('PC-2026-0003', v_hs10, '01', (NOW() - INTERVAL '27 days')::DATE, 'ThS. Vương Thế Hùng', 'CĐBP Ký túc xá', 'Tổ chức Hội nghị tổng kết hoạt động CĐ', 17000000, 'Mười bảy triệu đồng', 'chuyen_khoan', 'Vietcombank', '0123456789', 'Vương Thế Hùng', v_thuquy);
 
   -- =========================================================================
   -- HS 11: TU-2026-0011 | Phan Thi Tam | Tham quan hoc tap | 25M | da_duyet

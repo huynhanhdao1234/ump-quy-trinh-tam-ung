@@ -69,9 +69,25 @@ async function autoInitDb() {
   }
 }
 
+async function runMigrations() {
+  const { pool } = require('./db');
+  try {
+    const migrateSql = path.join(__dirname, 'migrate-unit-names.sql');
+    const fallback = path.join(__dirname, '..', 'db', 'migrate-unit-names.sql');
+    const sqlPath = fs.existsSync(migrateSql) ? migrateSql : fallback;
+    if (!fs.existsSync(sqlPath)) return;
+    await pool.query(fs.readFileSync(sqlPath, 'utf8'));
+    console.log('Migration migrate-unit-names applied');
+    fs.unlinkSync(sqlPath);
+  } catch (err) {
+    console.error('Migration error:', err.message);
+  }
+}
+
 app.listen(PORT, '0.0.0.0', async () => {
   console.log(`API server running on port ${PORT}`);
   await autoInitDb();
+  await runMigrations();
 });
 
 module.exports = app;

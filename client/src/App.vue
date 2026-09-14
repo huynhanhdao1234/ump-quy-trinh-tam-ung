@@ -77,6 +77,7 @@ function handleLogout() {
               <div class="flex-grow-1" style="min-width:0">
                 <div class="text-body-2 font-weight-medium text-truncate">{{ auth.user?.ho_ten }}</div>
                 <div class="text-caption text-medium-emphasis text-truncate">{{ auth.roleLabel }}</div>
+                <div v-if="auth.user?.don_vi?.ten_don_vi" class="text-caption text-medium-emphasis text-truncate">{{ auth.user.don_vi.ten_don_vi }}</div>
               </div>
             </div>
           </div>
@@ -110,6 +111,9 @@ function handleLogout() {
             <v-list-item prepend-icon="mdi-account-outline">
               <v-list-item-title>{{ auth.user?.ho_ten }}</v-list-item-title>
               <v-list-item-subtitle>{{ auth.roleLabel }}</v-list-item-subtitle>
+              <v-list-item-subtitle v-if="auth.user?.don_vi?.ten_don_vi">
+                <v-icon size="x-small" class="mr-1">mdi-domain</v-icon>{{ auth.user.don_vi.ten_don_vi }}
+              </v-list-item-subtitle>
             </v-list-item>
             <v-divider />
             <v-list-item prepend-icon="mdi-logout" title="Đăng xuất" @click="handleLogout" />

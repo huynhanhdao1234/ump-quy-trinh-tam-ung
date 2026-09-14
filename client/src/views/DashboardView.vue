@@ -138,6 +138,7 @@ const recentRequests = computed(() => requests.value.slice(0, 8))
                 <tr>
                   <th>Mã hồ sơ</th>
                   <th>Người đề nghị</th>
+                  <th>Đơn vị</th>
                   <th class="text-right">Số tiền</th>
                   <th>Trạng thái</th>
                 </tr>
@@ -151,11 +152,12 @@ const recentRequests = computed(() => requests.value.slice(0, 8))
                 >
                   <td class="font-weight-medium">{{ r.ma_ho_so }}</td>
                   <td>{{ r.nguoi_de_nghi?.ho_ten || r.ten_nguoi_de_nghi || '' }}</td>
+                  <td>{{ r.don_vi?.ten_don_vi || '' }}</td>
                   <td class="text-right">{{ formatCurrency(r.so_tien_de_nghi) }}đ</td>
                   <td><RequestStatusChip :status="r.trang_thai" size="small" /></td>
                 </tr>
                 <tr v-if="recentRequests.length === 0">
-                  <td colspan="4" class="text-center text-medium-emphasis py-8">Chưa có hồ sơ nào</td>
+                  <td colspan="5" class="text-center text-medium-emphasis py-8">Chưa có hồ sơ nào</td>
                 </tr>
               </tbody>
             </v-table>
