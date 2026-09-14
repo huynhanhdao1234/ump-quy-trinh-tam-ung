@@ -51,6 +51,34 @@ function formatDate(dt) {
   if (!dt) return ''
   return new Date(dt).toLocaleDateString('vi-VN')
 }
+
+function addWorkingDays(date, days) {
+  const result = new Date(date)
+  let added = 0
+  while (added < days) {
+    result.setDate(result.getDate() + 1)
+    const dow = result.getDay()
+    if (dow !== 0 && dow !== 6) added++
+  }
+  return result
+}
+
+function formatDeadline(r) {
+  if (!r.created_at) return ''
+  if (r.trang_thai === 'hoan_tat') return new Date(r.updated_at).toLocaleDateString('vi-VN')
+  return addWorkingDays(new Date(r.created_at), 11).toLocaleDateString('vi-VN')
+}
+
+function isOverdue(r) {
+  if (!r.created_at || ['hoan_tat', 'tu_choi'].includes(r.trang_thai)) return false
+  return new Date() > addWorkingDays(new Date(r.created_at), 11)
+}
+
+function getDeadlineClass(r) {
+  if (r.trang_thai === 'hoan_tat') return 'text-success'
+  if (isOverdue(r)) return 'text-error'
+  return ''
+}
 </script>
 
 <template>
@@ -102,6 +130,7 @@ function formatDate(dt) {
               <th class="text-right">Số tiền</th>
               <th>Trạng thái</th>
               <th>Ngày tạo</th>
+              <th>Hạn hoàn tất</th>
             </tr>
           </thead>
           <tbody>
@@ -118,9 +147,13 @@ function formatDate(dt) {
               <td class="text-right font-weight-medium">{{ formatCurrency(r.so_tien_de_nghi) }}đ</td>
               <td><RequestStatusChip :status="r.trang_thai" size="small" /></td>
               <td class="text-caption">{{ formatDate(r.created_at) }}</td>
+              <td class="text-caption" :class="getDeadlineClass(r)">
+                {{ formatDeadline(r) }}
+                <v-chip v-if="isOverdue(r)" color="error" size="x-small" class="ml-1">Quá hạn</v-chip>
+              </td>
             </tr>
             <tr v-if="filteredRequests.length === 0">
-              <td colspan="7" class="text-center text-medium-emphasis py-8">
+              <td colspan="8" class="text-center text-medium-emphasis py-8">
                 {{ search || filterStatus ? 'Không tìm thấy hồ sơ phù hợp' : 'Chưa có hồ sơ nào' }}
               </td>
             </tr>
