@@ -12,7 +12,7 @@
 
 | Màn hình | Ảnh chụp |
 |----------|----------|
-| Đăng nhập | ![Login](docs/screenshots/01-login.png) |
+| Đăng nhập | ![Login](docs/screenshots/01-login.png?v=2) |
 | Tổng quan (Chủ tịch) | ![Dashboard](docs/screenshots/02-dashboard.png) |
 | Danh sách hồ sơ | ![Requests](docs/screenshots/03-requests.png) |
 | Chi tiết hồ sơ + Workflow | ![Detail](docs/screenshots/04-request-detail.png) |
