@@ -167,6 +167,10 @@ function formatDate(dt) {
                         <td class="text-medium-emphasis">Ngày tạo</td>
                         <td>{{ formatDate(request.created_at) }}</td>
                       </tr>
+                      <tr v-if="request.trang_thai === 'hoan_tat'">
+                        <td class="text-medium-emphasis">Ngày hoàn tất</td>
+                        <td class="font-weight-medium text-success">{{ formatDate(request.updated_at) }}</td>
+                      </tr>
                     </tbody>
                   </v-table>
 
