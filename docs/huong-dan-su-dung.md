@@ -6,7 +6,7 @@
 
 ## 1. Đăng nhập hệ thống
 
-1. Truy cập địa chỉ hệ thống: `http://localhost:8080`
+1. Truy cập địa chỉ hệ thống: [https://web-production-404e7.up.railway.app](https://web-production-404e7.up.railway.app) (hoặc `http://localhost:5173` nếu chạy local)
 2. Nhập **Email** và **Mật khẩu** được cấp.
 3. Nhấn **Đăng nhập**.
 4. Hệ thống sẽ tự động chuyển đến trang **Tổng quan** phù hợp với vai trò của bạn.

@@ -16,8 +16,8 @@ Quy trình này quy định các bước đề nghị, xét duyệt và chi tạ
 
 Áp dụng cho tất cả **Công đoàn Bộ phận (CĐBP)** và **Tổ Công đoàn (Tổ CĐ)** trực thuộc CĐCS Đại học Y Dược TP.HCM, bao gồm:
 
-- 9 CĐBP (Khoa Y, Khoa RHM, Khoa Dược, Khoa YTCC, Khoa ĐD-KTYH, BV ĐHYD, Phòng TCCB, Phòng KHTC, Phòng ĐTĐH)
-- 17 Tổ CĐ (các Phòng/Ban/Bộ môn/Trung tâm)
+- 9 CĐBP (Trường Y, Khoa RHM, Trường Dược, Khoa YTCC, Trường ĐD-KTYH, BV ĐHYD TPHCM, Khoa YHCT, Khoa KHCB, KTX)
+- 17 Tổ CĐ (các Phòng/Trung tâm/Thư viện)
 
 ## 3. Sơ đồ quy trình
 

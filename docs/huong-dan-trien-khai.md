@@ -21,7 +21,7 @@
 
 ```
 quy-trinh-tam-ung/
-├── client/                 # Vue 3 + Vuetify 3 Frontend
+├── client/                 # Vue 3 + Vuetify 4 Frontend
 │   ├── src/
 │   │   ├── api/            # Gọi API (axios)
 │   │   ├── components/     # Components dùng chung
@@ -61,8 +61,8 @@ quy-trinh-tam-ung/
 ### Bước 1: Clone dự án
 
 ```bash
-git clone <repository-url>
-cd quy-trinh-tam-ung
+git clone https://github.com/huynhanhdao1234/ump-quy-trinh-tam-ung.git
+cd ump-quy-trinh-tam-ung
 ```
 
 ### Bước 2: Tạo file biến môi trường
@@ -110,7 +110,7 @@ npm run dev
 
 ### Bước 5: Truy cập hệ thống
 
-Mở trình duyệt tại: **http://localhost:8080**
+Mở trình duyệt tại: **http://localhost:5173**
 
 Đăng nhập với tài khoản demo (xem [Hướng dẫn sử dụng](huong-dan-su-dung.md#tài-khoản-demo)).
 
