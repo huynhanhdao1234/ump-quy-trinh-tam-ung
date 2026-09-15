@@ -193,5 +193,6 @@ function handleLogout() {
 .v-table thead th,
 .v-data-table thead th {
   background: transparent !important;
+  font-weight: 700 !important;
 }
 </style>
