@@ -182,6 +182,10 @@ function handleLogout() {
   box-shadow: 0 2px 8px rgba(26, 115, 232, 0.08) !important;
 }
 
+.v-main {
+  background-color: #EDF2F7 !important;
+}
+
 .v-table thead tr,
 .v-data-table thead tr {
   background: #EBF5FF !important;
