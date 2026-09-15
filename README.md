@@ -27,24 +27,25 @@
 
 ### 1.1. Hiện trạng (trước khi số hóa)
 
-Quy trình tạm ứng tài chính công đoàn (mã số **ĐHYD-CĐ/QT.02**) hiện đang thực hiện hoàn toàn bằng **giấy tờ thủ công**:
+Quy trình tạm ứng tài chính công đoàn (mã số **ĐHYD-CĐ/QT.02**) hiện đang thực hiện chủ yếu bằng **giấy tờ thủ công**:
 
-- Người đề nghị **viết tay** hoặc in Giấy đề nghị tạm ứng (C42-HD), bảng dự trù kinh phí (HSTU-01/02), danh sách ký nhận (HSTU-03).
+- Người đề nghị tự soạn hoặc điền tay các biểu mẫu: Giấy đề nghị tạm ứng (C42-HD), bảng dự trù kinh phí (HSTU-01/02), danh sách ký nhận (HSTU-03).
 - Hồ sơ giấy được **chuyển tay** qua 5 người (Người đề nghị → Chuyên viên VPCĐ → Kế toán → Chủ tịch CĐCS → Thủ quỹ).
-- Theo dõi tiến độ bằng **sổ tay ghi chép**, không có hệ thống tra cứu.
-- Thủ quỹ **in** Phiếu chi (C41-BB) từ mẫu giấy, điền thông tin thủ công, dễ sai sót.
-- Lưu trữ **bản giấy** trong tủ hồ sơ, khó tìm kiếm, rủi ro mất mát.
+- Theo dõi tiến độ qua **điện thoại hoặc hỏi trực tiếp**, không có hệ thống tra cứu tập trung.
+- Thủ quỹ **in** Phiếu chi (C41-BB) từ mẫu giấy, tự điền thông tin, dễ nhầm số liệu.
+- Kế toán phải **đối chiếu thủ công** từng dòng dự trù với số tiền đề nghị.
+- Lưu trữ **chỉ bản giấy** trong tủ hồ sơ, tra cứu mất thời gian, không có bản điện tử dự phòng.
 
 ### 1.2. Điểm nghẽn
 
-| # | Điểm nghẽn | Hệ quả |
-|---|-----------|--------|
-| 1 | **Chuyển hồ sơ giấy qua nhiều người** | Mất 2-3 ngày chỉ để hồ sơ đến đúng người xử lý, tổng quy trình có thể kéo dài 3-4 tuần |
-| 2 | **Không theo dõi được tiến độ** | Người đề nghị không biết hồ sơ đang ở bước nào, ai đang giữ, phải liên hệ từng người hỏi |
-| 3 | **Kiểm tra thủ công** | Kế toán phải kiểm tra từng dòng dự trù, tính toán lại bằng tay, dễ sai sót số liệu |
-| 4 | **Thiếu minh bạch** | Không có bằng chứng ai duyệt khi nào, khó quy trách nhiệm khi có vấn đề |
-| 5 | **Lưu trữ bản giấy** | Hồ sơ 10 năm chiếm nhiều không gian, khó tìm kiếm, rủi ro cháy/mất/hư hỏng |
-| 6 | **Không có SLA** | Không có cơ chế cảnh báo khi quá hạn xử lý, hồ sơ có thể bị "quên" |
+| # | Điểm nghẽn | Hiện trạng | Hệ quả |
+|---|-----------|-----------|--------|
+| 1 | **Soạn biểu mẫu thủ công** | Người đề nghị tự soạn từ đầu hoặc điền tay vào mẫu in sẵn | Tốn thời gian, dễ thiếu thông tin bắt buộc, tính toán sai thành tiền |
+| 2 | **Chuyển hồ sơ giấy qua nhiều người** | Hồ sơ phải đi qua 5 người, chuyển bằng tay | Mất 2-3 ngày chỉ để đến đúng người xử lý, hồ sơ có thể nằm trên bàn chờ |
+| 3 | **Không theo dõi được tiến độ** | Muốn biết hồ sơ đến đâu phải gọi điện hoặc đi hỏi từng người | Người đề nghị bị động, không biết ai đang giữ hồ sơ |
+| 4 | **Đối chiếu số liệu thủ công** | Kế toán kiểm tra từng dòng dự trù, đối chiếu tổng bằng tay | Dễ sai sót, mất thời gian kiểm tra mỗi hồ sơ |
+| 5 | **Lưu trữ chỉ bản giấy** | Hồ sơ 10 năm chỉ có bản giấy trong tủ, không có bản điện tử | Khó tra cứu, rủi ro mất mát, tốn không gian lưu trữ |
+| 6 | **Không có thời hạn xử lý rõ ràng** | Không có quy định cụ thể mỗi bước mất bao lâu | Hồ sơ có thể bị chậm trễ hoặc "quên" mà không ai biết |
 
 ### 1.3. Giải pháp số hóa
 
@@ -55,11 +56,14 @@ Tạo hồ sơ → Tiếp nhận → Kiểm tra → Phê duyệt → Chi tiền 
 (Đoàn viên)  (Chuyên viên) (Kế toán)  (Chủ tịch)  (Thủ quỹ)  (Chuyên viên)
 ```
 
-- **Mỗi bước** tự động chuyển đến đúng người xử lý tiếp theo
-- **Thông báo** gửi ngay khi hồ sơ cần xử lý
-- **SLA** cấu hình thời hạn xử lý từng bước (Chủ tịch quản lý)
-- **AI** hỗ trợ kiểm tra, tóm tắt, gợi ý nhận xét
-- **Xuất biểu mẫu** — hệ thống tự động điền dữ liệu vào biểu mẫu, hỗ trợ in bản giấy khi cần lưu trữ theo quy định
+| Điểm nghẽn | Giải pháp | Tính năng hệ thống |
+|-----------|----------|-------------------|
+| Soạn biểu mẫu thủ công | Hệ thống tự điền dữ liệu, tự tính toán, chỉ cần in bản chính thức | Stepper 4 bước, auto-calc, validation bắt buộc |
+| Chuyển hồ sơ qua nhiều người | Tự động chuyển đến người xử lý tiếp theo + gửi thông báo | Workflow engine + database triggers |
+| Không theo dõi tiến độ | Tra cứu trạng thái hồ sơ online mọi lúc | Thanh tiến trình 6 bước, danh sách hồ sơ có bộ lọc |
+| Đối chiếu số liệu thủ công | Tự động tính thành tiền, tổng cộng + AI kiểm tra bất thường | Auto-calc + AI Kiểm tra |
+| Lưu trữ chỉ bản giấy | Lưu trữ kép: điện tử trên hệ thống + in bản giấy khi cần | Cloud database + xuất PDF/Excel |
+| Không có thời hạn xử lý | Cấu hình thời hạn (SLA) cho từng bước, thông báo tự động | Cấu hình SLA + thông báo realtime |
 
 > Chi tiết quy trình: [`docs/quy-trinh-tam-ung.md`](docs/quy-trinh-tam-ung.md)
 
