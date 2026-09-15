@@ -51,10 +51,8 @@ export const ROLE_COLORS = {
 }
 
 export const ESTIMATE_TYPES = [
-  { value: 'HSTU-01', title: 'HSTU-01 — Hoạt động thường xuyên' },
-  { value: 'HSTU-02', title: 'HSTU-02 — Phong trào, sự kiện' },
-  { value: 'HSTU-03', title: 'HSTU-03 — Mua sắm, sửa chữa' },
-  { value: 'HSTU-04', title: 'HSTU-04 — Khác' },
+  { value: 'HSTU-01', title: 'HSTU-01 — Dự trù kinh phí hoạt động tháng' },
+  { value: 'HSTU-02', title: 'HSTU-02 — Dự trù kinh phí hoạt động phong trào/chuyên đề' },
 ]
 
 export const DEMO_ACCOUNTS = [

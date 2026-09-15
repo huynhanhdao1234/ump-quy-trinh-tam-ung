@@ -94,7 +94,7 @@ ${(signList || []).map(s => `- ${s.ho_ten}: ${Number(s.so_tien).toLocaleString('
 Kiểm tra các tiêu chí:
 1. Lý do tạm ứng có rõ ràng, hợp lệ không?
 2. Bảng dự trù có đầy đủ không (ít nhất 1 hạng mục)?
-3. Đơn giá có hợp lý không (so với mặt bằng chung)?
+3. Số tiền có hợp lý không (so với mặt bằng chung)?
 4. Tổng dự trù có khớp với số tiền đề nghị không?
 5. Danh sách ký nhận có phù hợp không?
 6. Có dấu hiệu bất thường không (số tiền quá lớn, hạng mục không liên quan)?

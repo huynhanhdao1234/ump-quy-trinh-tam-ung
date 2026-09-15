@@ -269,7 +269,7 @@ function formatDate(dt) {
                   <th>STT</th>
                   <th>Nội dung</th>
                   <th>ĐVT</th>
-                  <th class="text-right">Đơn giá</th>
+                  <th class="text-right">Số tiền</th>
                   <th class="text-right">SL</th>
                   <th class="text-right">Thành tiền</th>
                   <th>Ghi chú</th>

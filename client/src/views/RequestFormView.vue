@@ -210,7 +210,7 @@ async function saveRequest(submit = false) {
                   <tr>
                     <th style="width:50px">STT</th>
                     <th>Nội dung</th>
-                    <th style="width:160px">Đơn giá</th>
+                    <th style="width:160px">Số tiền</th>
                     <th style="width:90px">Số lượng</th>
                     <th style="width:100px">ĐVT</th>
                     <th style="width:150px">Thành tiền</th>
@@ -299,7 +299,7 @@ async function saveRequest(submit = false) {
 
               <h3 class="text-subtitle-1 font-weight-bold mb-2">Dự trù kinh phí</h3>
               <v-table density="compact" class="mb-1">
-                <thead><tr><th>STT</th><th>Nội dung</th><th>Đơn giá</th><th>SL</th><th>Thành tiền</th></tr></thead>
+                <thead><tr><th>STT</th><th>Nội dung</th><th>Số tiền</th><th>SL</th><th>Thành tiền</th></tr></thead>
                 <tbody>
                   <tr v-for="(e, i) in estimates.filter(e => e.noi_dung)" :key="i">
                     <td>{{ i + 1 }}</td><td>{{ e.noi_dung }}</td>
