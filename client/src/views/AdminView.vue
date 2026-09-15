@@ -5,6 +5,14 @@ import * as unitsApi from '@/api/units'
 import * as configApi from '@/api/config'
 import { ROLE_LABELS } from '@/utils/constants'
 
+const ROLE_BG = {
+  nguoi_de_nghi: '#DBEAFE',
+  thu_quy: '#CCFBF1',
+  chu_tich: '#EDE9FE',
+  ke_toan: '#FED7AA',
+  chuyen_vien: '#E0E7FF',
+}
+
 const tab = ref('users')
 const snackbar = ref(false)
 const snackMsg = ref('')
@@ -130,7 +138,7 @@ onMounted(() => {
   <v-container fluid>
     <h1 class="text-h5 mb-4">Quản trị hệ thống</h1>
 
-    <v-tabs v-model="tab" color="primary">
+    <v-tabs v-model="tab" color="primary" class="admin-tabs">
       <v-tab value="users" prepend-icon="mdi-account-group">Người dùng</v-tab>
       <v-tab value="units" prepend-icon="mdi-domain">Đơn vị</v-tab>
       <v-tab value="sla" prepend-icon="mdi-clock-check-outline">Cấu hình SLA</v-tab>
@@ -145,16 +153,16 @@ onMounted(() => {
           :loading="usersLoading"
           density="comfortable"
           items-per-page="15"
-          class="elevation-1"
+          class="admin-table"
         >
           <template #item.vai_tro="{ item }">
-            <v-chip size="small" variant="tonal">{{ ROLE_LABELS[item.vai_tro] || item.vai_tro }}</v-chip>
+            <v-chip size="small" variant="tonal" :style="ROLE_BG[item.vai_tro] ? { background: ROLE_BG[item.vai_tro] } : {}">{{ ROLE_LABELS[item.vai_tro] || item.vai_tro }}</v-chip>
           </template>
           <template #item.active="{ item }">
-            <v-chip :color="item.active ? 'success' : 'grey'" size="small">{{ item.active ? 'Hoạt động' : 'Đã khóa' }}</v-chip>
+            <v-chip :color="item.active ? 'success' : 'grey'" size="small" :style="item.active ? { background: '#D1FAE5' } : {}">{{ item.active ? 'Hoạt động' : 'Đã khóa' }}</v-chip>
           </template>
           <template #item.actions="{ item }">
-            <v-btn icon="mdi-pencil" size="small" variant="text" @click="editUser(item)" />
+            <v-btn icon="mdi-pencil" size="small" variant="text" class="edit-btn" @click="editUser(item)" />
           </template>
         </v-data-table>
       </v-tabs-window-item>
@@ -170,7 +178,7 @@ onMounted(() => {
           :loading="unitsLoading"
           density="comfortable"
           items-per-page="15"
-          class="elevation-1"
+          class="admin-table"
         >
           <template #item.loai_don_vi="{ item }">
             <v-chip size="small" :color="item.loai_don_vi === 'CDBP' ? 'blue' : 'teal'" variant="tonal">
@@ -178,14 +186,14 @@ onMounted(() => {
             </v-chip>
           </template>
           <template #item.actions="{ item }">
-            <v-btn icon="mdi-pencil" size="small" variant="text" @click="editUnit(item)" />
+            <v-btn icon="mdi-pencil" size="small" variant="text" class="edit-btn" @click="editUnit(item)" />
           </template>
         </v-data-table>
       </v-tabs-window-item>
 
       <!-- SLA TAB -->
       <v-tabs-window-item value="sla">
-        <v-card max-width="600" :loading="slaLoading">
+        <v-card max-width="600" :loading="slaLoading" class="admin-table">
           <v-card-title>Cấu hình thời gian xử lý (SLA)</v-card-title>
           <v-card-subtitle>Thời gian tối đa cho mỗi bước (ngày làm việc)</v-card-subtitle>
           <v-card-text>
@@ -243,3 +251,33 @@ onMounted(() => {
     <v-snackbar v-model="snackbar" :color="snackColor" timeout="3000">{{ snackMsg }}</v-snackbar>
   </v-container>
 </template>
+
+<style scoped>
+.admin-table {
+  background: #FFFFFF !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+.admin-table :deep(thead tr) {
+  background: #EBF5FF !important;
+}
+.admin-table :deep(thead th) {
+  background: transparent !important;
+}
+.admin-table :deep(tbody tr:hover) {
+  background: #F0F7FF !important;
+}
+
+.admin-tabs :deep(.v-tab--selected) {
+  background: #EBF5FF;
+  border-bottom: 2.5px solid #1A73E8;
+}
+.admin-tabs :deep(.v-tab:hover:not(.v-tab--selected)) {
+  background: #F0F7FF;
+}
+
+.edit-btn:hover {
+  background: #DBEAFE !important;
+  border-radius: 8px !important;
+}
+</style>
