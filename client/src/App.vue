@@ -41,7 +41,7 @@ function handleLogout() {
     </template>
 
     <template v-else>
-      <v-navigation-drawer v-model="drawer" :width="260">
+      <v-navigation-drawer v-model="drawer" :width="260" class="sidebar-drawer">
         <div class="sidebar-brand pa-3 d-flex align-center ga-3">
           <v-avatar color="primary" size="40" rounded="lg">
             <v-icon size="22" color="white">mdi-school</v-icon>
@@ -84,7 +84,7 @@ function handleLogout() {
         </template>
       </v-navigation-drawer>
 
-      <v-app-bar density="default" elevation="1">
+      <v-app-bar density="default" elevation="0" class="header-bar">
         <v-app-bar-nav-icon @click="drawer = !drawer" />
         <v-toolbar-title class="text-body-1 font-weight-medium">
           Hệ thống Quản lý Tạm ứng Tài chính Công đoàn
@@ -131,3 +131,54 @@ function handleLogout() {
     </template>
   </v-app>
 </template>
+
+<style>
+.sidebar-drawer .v-navigation-drawer__content {
+  background: linear-gradient(180deg, #1A73E8 0%, #0A2E5C 100%) !important;
+}
+.sidebar-drawer {
+  background: linear-gradient(180deg, #1A73E8 0%, #0A2E5C 100%) !important;
+}
+
+.sidebar-drawer .sidebar-brand .text-subtitle-2,
+.sidebar-drawer .sidebar-brand .text-caption {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.sidebar-drawer .v-list-item {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+.sidebar-drawer .v-list-item .v-icon {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+.sidebar-drawer .v-list-item:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+.sidebar-drawer .v-list-item--active {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-left: 3px solid #FFFFFF;
+}
+
+.sidebar-drawer .v-divider {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.sidebar-drawer .v-navigation-drawer__append {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+.sidebar-drawer .v-navigation-drawer__append .text-body-2,
+.sidebar-drawer .v-navigation-drawer__append .text-caption {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+.sidebar-drawer .v-navigation-drawer__append .rounded-lg {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+.sidebar-drawer .v-navigation-drawer__append .v-avatar {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.header-bar {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 2px 8px rgba(26, 115, 232, 0.08) !important;
+}
+</style>
