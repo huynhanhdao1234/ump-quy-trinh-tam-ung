@@ -41,18 +41,20 @@ onMounted(() => {
     </div>
 
     <!-- Empty state -->
-    <v-card v-if="notifStore.items.length === 0" class="text-center pa-8">
-      <v-icon icon="mdi-bell-off-outline" size="64" color="grey-lighten-1" class="mb-4" />
+    <v-card v-if="notifStore.items.length === 0" class="notif-card text-center pa-8">
+      <div class="empty-icon-circle mx-auto mb-4">
+        <v-icon icon="mdi-bell-off-outline" size="48" color="primary" />
+      </div>
       <div class="text-h6 text-medium-emphasis">Không có thông báo</div>
       <div class="text-body-2 text-medium-emphasis">Thông báo sẽ hiện ở đây khi có hoạt động liên quan đến bạn</div>
     </v-card>
 
     <!-- Notification list -->
-    <v-card v-else>
-      <v-list lines="two">
+    <v-card v-else class="notif-card">
+      <v-list lines="two" class="notif-list">
         <template v-for="(notif, i) in notifStore.items" :key="notif.id">
           <v-list-item
-            :class="{ 'bg-blue-lighten-5': !notif.da_doc }"
+            :class="['notif-item', { 'notif-unread': !notif.da_doc }]"
             @click="handleClick(notif)"
             class="cursor-pointer"
           >
@@ -77,3 +79,34 @@ onMounted(() => {
     </v-card>
   </v-container>
 </template>
+
+<style scoped>
+.notif-card {
+  background: #FFFFFF !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+.empty-icon-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #DBEAFE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notif-item {
+  background: #FFFFFF;
+}
+.notif-unread {
+  background: #EBF5FF !important;
+}
+.notif-item:hover {
+  background: #F0F7FF !important;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+</style>
