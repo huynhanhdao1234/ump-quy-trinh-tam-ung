@@ -162,8 +162,8 @@ async function saveRequest(submit = false) {
       </v-col>
     </v-row>
 
-    <v-card :loading="loading">
-      <v-stepper v-model="step" :items="['Thông tin chung', 'Dự trù kinh phí', 'Danh sách ký nhận', 'Xem lại & Nộp']" editable>
+    <v-card :loading="loading" class="form-card">
+      <v-stepper v-model="step" :items="['Thông tin chung', 'Dự trù kinh phí', 'Danh sách ký nhận', 'Xem lại & Nộp']" editable class="form-stepper">
         <!-- Step 1 -->
         <template v-slot:item.1>
           <v-card flat>
@@ -337,3 +337,95 @@ async function saveRequest(submit = false) {
     <v-snackbar v-model="snackbar" :color="snackColor" timeout="3000">{{ snackMsg }}</v-snackbar>
   </v-container>
 </template>
+
+<style scoped>
+.form-card {
+  background: #FFFFFF !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  padding: 32px !important;
+}
+
+/* Stepper header */
+.form-stepper :deep(.v-stepper-header) {
+  box-shadow: none !important;
+}
+
+/* Active step */
+.form-stepper :deep(.v-stepper-item--selected .v-stepper-item__avatar) {
+  background: #1A73E8 !important;
+}
+.form-stepper :deep(.v-stepper-item--selected .v-stepper-item__avatar .v-icon) {
+  color: #FFFFFF !important;
+}
+.form-stepper :deep(.v-stepper-item--selected .v-stepper-item__content) {
+  font-weight: 600 !important;
+  color: #1A73E8 !important;
+}
+
+/* Completed step */
+.form-stepper :deep(.v-stepper-item--complete .v-stepper-item__avatar) {
+  background: #10B981 !important;
+}
+.form-stepper :deep(.v-stepper-item--complete .v-stepper-item__avatar .v-icon) {
+  color: #FFFFFF !important;
+}
+
+/* Upcoming step */
+.form-stepper :deep(.v-stepper-item:not(.v-stepper-item--selected):not(.v-stepper-item--complete) .v-stepper-item__avatar) {
+  background: #E2E8F0 !important;
+  color: #94A3B8 !important;
+}
+
+/* Connector lines */
+.form-stepper :deep(.v-stepper-item--complete + .v-stepper__separator) {
+  background: #10B981 !important;
+}
+.form-stepper :deep(.v-stepper-item--selected + .v-stepper__separator) {
+  background: linear-gradient(90deg, #1A73E8, #E2E8F0) !important;
+}
+.form-stepper :deep(.v-stepper__separator) {
+  background: #E2E8F0 !important;
+}
+
+/* Form inputs */
+.form-stepper :deep(.v-field) {
+  background: #F8FAFC !important;
+  border-radius: 8px !important;
+}
+.form-stepper :deep(.v-field--variant-outlined .v-field__outline) {
+  --v-field-border-opacity: 1;
+  color: #D1D9E6 !important;
+}
+.form-stepper :deep(.v-field--focused .v-field__outline) {
+  color: #3B82F6 !important;
+}
+.form-stepper :deep(.v-field--focused) {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Next button */
+.form-stepper :deep(.v-stepper-actions .v-btn--variant-elevated),
+.form-stepper :deep(.v-stepper-actions .v-btn--variant-flat):last-child {
+  background: linear-gradient(135deg, #1A73E8, #2563EB) !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  padding: 10px 24px !important;
+  box-shadow: none !important;
+}
+.form-stepper :deep(.v-stepper-actions .v-btn--variant-elevated:hover),
+.form-stepper :deep(.v-stepper-actions .v-btn--variant-flat):last-child:hover {
+  background: linear-gradient(135deg, #1557B0, #1A73E8) !important;
+  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3) !important;
+}
+
+/* Back button */
+.form-stepper :deep(.v-stepper-actions .v-btn--variant-text) {
+  color: #3B82F6 !important;
+}
+.form-stepper :deep(.v-stepper-actions .v-btn--variant-text:hover) {
+  color: #1A73E8 !important;
+  text-decoration: underline;
+}
+</style>
