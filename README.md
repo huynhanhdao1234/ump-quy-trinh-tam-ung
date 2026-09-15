@@ -12,14 +12,14 @@
 
 | Màn hình | Ảnh chụp |
 |----------|----------|
-| Đăng nhập | ![Login](docs/screenshots/01-login.png?v=2) |
-| Tổng quan (Chủ tịch) | ![Dashboard](docs/screenshots/02-dashboard.png) |
-| Danh sách hồ sơ | ![Requests](docs/screenshots/03-requests.png) |
-| Chi tiết hồ sơ + Workflow | ![Detail](docs/screenshots/04-request-detail.png) |
-| AI Tóm tắt & Kiểm tra | ![AI Features](docs/screenshots/05-ai-features.png) |
-| AI Chatbot | ![Chatbot](docs/screenshots/06-ai-chatbot.png) |
-| Báo cáo & Biểu đồ | ![Reports](docs/screenshots/07-reports.png) |
-| Quản trị hệ thống | ![Admin](docs/screenshots/08-admin.png) |
+| Đăng nhập | ![Login](docs/screenshots/01-login.png?v=3) |
+| Tổng quan (Chủ tịch) | ![Dashboard](docs/screenshots/02-dashboard.png?v=3) |
+| Danh sách hồ sơ | ![Requests](docs/screenshots/03-requests.png?v=3) |
+| Chi tiết hồ sơ + Workflow | ![Detail](docs/screenshots/04-request-detail.png?v=3) |
+| AI Tóm tắt & Kiểm tra | ![AI Features](docs/screenshots/05-ai-features.png?v=3) |
+| AI Chatbot | ![Chatbot](docs/screenshots/06-ai-chatbot.png?v=3) |
+| Báo cáo & Biểu đồ | ![Reports](docs/screenshots/07-reports.png?v=3) |
+| Quản trị hệ thống | ![Admin](docs/screenshots/08-admin.png?v=3) |
 
 ---
 
