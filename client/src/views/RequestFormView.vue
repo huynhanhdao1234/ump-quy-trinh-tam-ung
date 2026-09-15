@@ -47,7 +47,7 @@ const signListTotal = computed(() =>
   signList.value.reduce((s, r) => s + (r.so_tien || 0) * (r.so_ngay || 1), 0)
 )
 
-const formValid = computed(() => !!form.value.ly_do && !!form.value.don_vi_id)
+const formValid = computed(() => !!form.value.ly_do && !!form.value.don_vi_id && !!form.value.loai_du_tru && !!form.value.thoi_han_thanh_toan)
 
 function addEstimateRow() {
   estimates.value.push({ noi_dung: '', don_gia: 0, so_luong: 1, don_vi_tinh: 'Cái', ghi_chu: '' })
@@ -107,6 +107,8 @@ onMounted(async () => {
 async function saveRequest(submit = false) {
   if (!form.value.ly_do) { showMsg('Vui lòng nhập lý do tạm ứng', 'warning'); return }
   if (!form.value.don_vi_id) { showMsg('Vui lòng chọn đơn vị', 'warning'); return }
+  if (!form.value.loai_du_tru) { showMsg('Vui lòng chọn loại dự trù', 'warning'); return }
+  if (!form.value.thoi_han_thanh_toan) { showMsg('Vui lòng nhập thời hạn thanh toán', 'warning'); return }
 
   saving.value = true
   try {
@@ -183,7 +185,7 @@ async function saveRequest(submit = false) {
                   />
                 </v-col>
                 <v-col cols="12" md="6">
-                  <v-select v-model="form.loai_du_tru" :items="ESTIMATE_TYPES" label="Loại dự trù" />
+                  <v-select v-model="form.loai_du_tru" :items="ESTIMATE_TYPES" label="Loại dự trù *" :rules="[v => !!v || 'Bắt buộc']" />
                 </v-col>
                 <v-col cols="12" md="4">
                   <v-text-field v-model="form.thang_nam" label="Tháng/năm" placeholder="VD: 09/2026" />
@@ -192,7 +194,7 @@ async function saveRequest(submit = false) {
                   <v-text-field v-model="form.ten_phong_trao" label="Tên phong trào" />
                 </v-col>
                 <v-col cols="12" md="4">
-                  <v-text-field v-model="form.thoi_han_thanh_toan" label="Thời hạn thanh toán" type="date" />
+                  <v-text-field v-model="form.thoi_han_thanh_toan" label="Thời hạn thanh toán *" type="date" :rules="[v => !!v || 'Bắt buộc']" />
                 </v-col>
               </v-row>
             </v-card-text>
