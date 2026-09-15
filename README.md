@@ -267,6 +267,7 @@ quy-trinh-tam-ung/
 | Sơ đồ quy trình | [`docs/quy-trinh-tam-ung.md`](docs/quy-trinh-tam-ung.md) |
 | Hướng dẫn sử dụng | [`docs/huong-dan-su-dung.md`](docs/huong-dan-su-dung.md) |
 | Hướng dẫn triển khai | [`docs/huong-dan-trien-khai.md`](docs/huong-dan-trien-khai.md) |
+| Biểu mẫu điện tử đã xây dựng và số hóa | [`docs/bieu-mau-dien-tu.md`](docs/bieu-mau-dien-tu.md) |
 
 ---
 
