@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import * as requestsApi from '@/api/requests'
 import * as unitsApi from '@/api/units'
+import * as usersApi from '@/api/users'
 import * as workflowApi from '@/api/workflow'
 import { formatCurrency, formatCurrencyFull } from '@/utils/money'
 import { ESTIMATE_TYPES } from '@/utils/constants'
@@ -21,6 +22,31 @@ const units = ref([])
 const snackbar = ref(false)
 const snackMsg = ref('')
 const snackColor = ref('success')
+
+const nguoiDeNghi = ref(null)
+const nguoiDeNghiSearch = ref('')
+const nguoiDeNghiItems = ref([])
+const nguoiDeNghiLoading = ref(false)
+
+let searchTimeout = null
+watch(nguoiDeNghiSearch, (val) => {
+  if (!val || val.length < 1) return
+  clearTimeout(searchTimeout)
+  searchTimeout = setTimeout(async () => {
+    nguoiDeNghiLoading.value = true
+    try {
+      nguoiDeNghiItems.value = await usersApi.searchUsers(val)
+    } finally {
+      nguoiDeNghiLoading.value = false
+    }
+  }, 300)
+})
+
+watch(nguoiDeNghi, (selected) => {
+  if (selected && selected.don_vi_id) {
+    form.value.don_vi_id = selected.don_vi_id
+  }
+})
 
 const form = ref({
   ly_do: '',
@@ -47,7 +73,7 @@ const signListTotal = computed(() =>
   signList.value.reduce((s, r) => s + (r.so_tien || 0) * (r.so_ngay || 1), 0)
 )
 
-const formValid = computed(() => !!form.value.ly_do && !!form.value.don_vi_id && !!form.value.loai_du_tru && !!form.value.thoi_han_thanh_toan)
+const formValid = computed(() => !!nguoiDeNghi.value && !!form.value.ly_do && !!form.value.don_vi_id && !!form.value.loai_du_tru && !!form.value.thoi_han_thanh_toan)
 
 function addEstimateRow() {
   estimates.value.push({ noi_dung: '', don_gia: 0, so_luong: 1, don_vi_tinh: 'Cái', ghi_chu: '' })
@@ -81,6 +107,11 @@ onMounted(async () => {
       const req = await requestsApi.getRequestById(route.params.id)
       if (!req) { router.push('/requests'); return }
       existingId = req.id || req.ma_ho_so
+      if (req.nguoi_de_nghi) {
+        const ndn = { id: req.nguoi_de_nghi.id, ho_ten: req.nguoi_de_nghi.ho_ten, don_vi_id: req.don_vi_id, ten_don_vi: req.don_vi?.ten_don_vi }
+        nguoiDeNghiItems.value = [ndn]
+        nguoiDeNghi.value = ndn
+      }
       form.value = {
         ly_do: req.ly_do || '',
         don_vi_id: req.don_vi_id || null,
@@ -105,6 +136,7 @@ onMounted(async () => {
 })
 
 async function saveRequest(submit = false) {
+  if (!nguoiDeNghi.value) { showMsg('Vui lòng chọn họ tên người đề nghị', 'warning'); return }
   if (!form.value.ly_do) { showMsg('Vui lòng nhập lý do tạm ứng', 'warning'); return }
   if (!form.value.don_vi_id) { showMsg('Vui lòng chọn đơn vị', 'warning'); return }
   if (!form.value.loai_du_tru) { showMsg('Vui lòng chọn loại dự trù', 'warning'); return }
@@ -114,6 +146,7 @@ async function saveRequest(submit = false) {
   try {
     const payload = {
       ...form.value,
+      nguoi_de_nghi_id: nguoiDeNghi.value.id,
       so_tien_de_nghi: estimateTotal.value || signListTotal.value,
       trang_thai: 'nhap',
     }
@@ -171,8 +204,37 @@ async function saveRequest(submit = false) {
           <v-card flat>
             <v-card-text>
               <v-row>
-                <v-col cols="12">
-                  <v-textarea v-model="form.ly_do" label="Lý do tạm ứng *" rows="3" :rules="[v => !!v || 'Bắt buộc']" />
+                <v-col cols="12" md="6">
+                  <v-autocomplete
+                    v-model="nguoiDeNghi"
+                    v-model:search="nguoiDeNghiSearch"
+                    :items="nguoiDeNghiItems"
+                    :loading="nguoiDeNghiLoading"
+                    item-title="ho_ten"
+                    label="Họ và tên người đề nghị *"
+                    placeholder="Nhập họ tên để tìm kiếm..."
+                    prepend-inner-icon="mdi-account-outline"
+                    return-object
+                    no-filter
+                    clearable
+                    :rules="[v => !!v || 'Bắt buộc']"
+                  >
+                    <template #item="{ item, props: itemProps }">
+                      <v-list-item v-bind="itemProps">
+                        <template #subtitle>
+                          {{ item.raw.ten_don_vi || '' }}{{ item.raw.chuc_vu ? ' — ' + item.raw.chuc_vu : '' }}
+                        </template>
+                      </v-list-item>
+                    </template>
+                    <template #no-data>
+                      <v-list-item v-if="nguoiDeNghiSearch?.length >= 1">
+                        <v-list-item-title>Không tìm thấy "{{ nguoiDeNghiSearch }}"</v-list-item-title>
+                      </v-list-item>
+                      <v-list-item v-else>
+                        <v-list-item-title>Nhập họ tên để tìm kiếm</v-list-item-title>
+                      </v-list-item>
+                    </template>
+                  </v-autocomplete>
                 </v-col>
                 <v-col cols="12" md="6">
                   <v-autocomplete
@@ -182,7 +244,13 @@ async function saveRequest(submit = false) {
                     item-value="id"
                     label="Đơn vị *"
                     :rules="[v => !!v || 'Bắt buộc']"
+                    :readonly="!!nguoiDeNghi?.don_vi_id"
+                    :hint="nguoiDeNghi?.don_vi_id ? 'Tự động theo người đề nghị' : ''"
+                    persistent-hint
                   />
+                </v-col>
+                <v-col cols="12">
+                  <v-textarea v-model="form.ly_do" label="Lý do tạm ứng *" rows="3" :rules="[v => !!v || 'Bắt buộc']" />
                 </v-col>
                 <v-col cols="12" md="6">
                   <v-select v-model="form.loai_du_tru" :items="ESTIMATE_TYPES" label="Loại dự trù *" :rules="[v => !!v || 'Bắt buộc']" />
@@ -288,8 +356,9 @@ async function saveRequest(submit = false) {
               <h3 class="text-subtitle-1 font-weight-bold mb-3">Thông tin chung</h3>
               <v-table density="compact" class="mb-4">
                 <tbody>
-                  <tr><td class="font-weight-medium" style="width:200px">Lý do</td><td>{{ form.ly_do }}</td></tr>
+                  <tr><td class="font-weight-medium" style="width:200px">Người đề nghị</td><td>{{ nguoiDeNghi?.ho_ten || '-' }}</td></tr>
                   <tr><td class="font-weight-medium">Đơn vị</td><td>{{ units.find(u => u.id === form.don_vi_id)?.ten_don_vi || '-' }}</td></tr>
+                  <tr><td class="font-weight-medium">Lý do</td><td>{{ form.ly_do }}</td></tr>
                   <tr><td class="font-weight-medium">Loại dự trù</td><td>{{ ESTIMATE_TYPES.find(e => e.value === form.loai_du_tru)?.title || form.loai_du_tru }}</td></tr>
                   <tr v-if="form.thang_nam"><td class="font-weight-medium">Tháng/năm</td><td>{{ form.thang_nam }}</td></tr>
                   <tr v-if="form.ten_phong_trao"><td class="font-weight-medium">Tên phong trào</td><td>{{ form.ten_phong_trao }}</td></tr>

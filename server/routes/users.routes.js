@@ -10,6 +10,26 @@ const USER_SELECT = `
 
 router.use(authenticate);
 
+router.get('/search', async (req, res, next) => {
+  try {
+    const q = req.query.q || '';
+    const { rows } = await db.query(
+      `SELECT p.id, p.ho_ten, p.don_vi_id, p.chuc_vu,
+              d.ten_don_vi, d.ma_don_vi
+       FROM profiles p
+       LEFT JOIN don_vi d ON d.id = p.don_vi_id
+       WHERE p.active = true
+         AND p.ho_ten ILIKE $1
+       ORDER BY p.ho_ten
+       LIMIT 20`,
+      [`%${q}%`]
+    );
+    res.json(rows);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/', async (req, res, next) => {
   try {
     const { rows } = await db.query(
