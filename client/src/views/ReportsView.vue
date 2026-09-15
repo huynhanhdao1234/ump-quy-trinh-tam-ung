@@ -132,7 +132,7 @@ onMounted(async () => {
     <h1 class="text-h6 font-weight-bold mb-2">Báo cáo & Thống kê</h1>
 
     <!-- Filters -->
-    <v-card class="mb-2">
+    <v-card class="mb-2 reports-card">
       <v-card-text>
         <v-row align="center">
           <v-col cols="12" sm="4" md="3">
@@ -155,8 +155,8 @@ onMounted(async () => {
             />
           </v-col>
           <v-col cols="12" md="3" class="d-flex ga-2 justify-end">
-            <v-btn prepend-icon="mdi-file-excel" variant="outlined" size="small" color="success" @click="handleExportExcel">Excel</v-btn>
-            <v-btn prepend-icon="mdi-file-pdf-box" variant="outlined" size="small" color="error" @click="handleExportPdf">PDF</v-btn>
+            <v-btn prepend-icon="mdi-file-excel" variant="flat" size="small" class="btn-excel" @click="handleExportExcel">Excel</v-btn>
+            <v-btn prepend-icon="mdi-file-pdf-box" variant="flat" size="small" class="btn-pdf" @click="handleExportPdf">PDF</v-btn>
           </v-col>
         </v-row>
       </v-card-text>
@@ -165,21 +165,21 @@ onMounted(async () => {
     <!-- Stats -->
     <v-row dense class="mb-2">
       <v-col cols="6" md="3">
-        <StatsCard title="Tổng hồ sơ" :value="totalRequests" icon="mdi-file-document-multiple" color="primary" />
+        <StatsCard title="Tổng hồ sơ" :value="totalRequests" icon="mdi-file-document-multiple" color="primary" gradient="linear-gradient(135deg, #1A73E8, #3B82F6)" />
       </v-col>
       <v-col cols="6" md="3">
-        <StatsCard title="Tổng đề nghị" :value="formatCurrencyFull(totalAmount)" icon="mdi-cash" color="info" />
+        <StatsCard title="Tổng đề nghị" :value="formatCurrencyFull(totalAmount)" icon="mdi-cash" color="info" gradient="linear-gradient(135deg, #7C3AED, #8B5CF6)" />
       </v-col>
       <v-col cols="6" md="3">
-        <StatsCard title="Đã duyệt" :value="formatCurrencyFull(totalApproved)" icon="mdi-check-circle" color="success" />
+        <StatsCard title="Đã duyệt" :value="formatCurrencyFull(totalApproved)" icon="mdi-check-circle" color="success" gradient="linear-gradient(135deg, #10B981, #34D399)" />
       </v-col>
       <v-col cols="6" md="3">
-        <StatsCard title="Đã chi" :value="formatCurrencyFull(totalPaid)" icon="mdi-cash-check" color="teal" />
+        <StatsCard title="Đã chi" :value="formatCurrencyFull(totalPaid)" icon="mdi-cash-check" color="teal" gradient="linear-gradient(135deg, #0EA5E9, #38BDF8)" />
       </v-col>
     </v-row>
 
     <!-- Chart -->
-    <v-card v-if="statusCounts.length > 0" class="mb-2">
+    <v-card v-if="statusCounts.length > 0" class="mb-2 reports-card">
       <v-card-title>Phân bổ theo trạng thái</v-card-title>
       <v-card-text>
         <div style="height: 250px">
@@ -195,7 +195,7 @@ onMounted(async () => {
       :loading="loading"
       density="comfortable"
       items-per-page="20"
-      class="elevation-1"
+      class="reports-table"
     >
       <template #item.nguoi_de_nghi="{ item }">
         {{ item.nguoi_de_nghi?.ho_ten || item.ten_nguoi_de_nghi || '-' }}
@@ -218,3 +218,41 @@ onMounted(async () => {
     </v-data-table>
   </v-container>
 </template>
+
+<style scoped>
+.reports-card {
+  background: #FFFFFF !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+.btn-excel {
+  background: #D1FAE5 !important;
+  color: #065F46 !important;
+}
+.btn-excel:hover {
+  background: #A7F3D0 !important;
+}
+
+.btn-pdf {
+  background: #FEE2E2 !important;
+  color: #991B1B !important;
+}
+.btn-pdf:hover {
+  background: #FECACA !important;
+}
+
+.reports-table {
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+.reports-table :deep(thead tr) {
+  background: #EBF5FF !important;
+}
+.reports-table :deep(thead th) {
+  background: transparent !important;
+}
+.reports-table :deep(tbody tr:hover) {
+  background: #F0F7FF !important;
+}
+</style>
