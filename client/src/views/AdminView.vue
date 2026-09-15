@@ -5,12 +5,13 @@ import * as unitsApi from '@/api/units'
 import * as configApi from '@/api/config'
 import { ROLE_LABELS } from '@/utils/constants'
 
-const ROLE_BG = {
-  nguoi_de_nghi: '#DBEAFE',
-  thu_quy: '#CCFBF1',
-  chu_tich: '#EDE9FE',
-  ke_toan: '#FED7AA',
-  chuyen_vien: '#E0E7FF',
+const ROLE_STYLES = {
+  nguoi_de_nghi: { background: '#DBEAFE', border: '1px solid #93C5FD' },
+  thu_quy: { background: '#FED7AA', border: '1px solid #FDBA74' },
+  chu_tich: { background: '#E9D5FF', border: '1px solid #C4B5FD' },
+  ke_toan: { background: '#FDE68A', border: '1px solid #FCD34D' },
+  chuyen_vien: { background: '#A7F3D0', border: '1px solid #6EE7B7' },
+  to_truong: { background: '#FECACA', border: '1px solid #FCA5A5' },
 }
 
 const tab = ref('users')
@@ -156,7 +157,7 @@ onMounted(() => {
           class="admin-table"
         >
           <template #item.vai_tro="{ item }">
-            <v-chip size="small" variant="tonal" :style="ROLE_BG[item.vai_tro] ? { background: ROLE_BG[item.vai_tro] } : {}">{{ ROLE_LABELS[item.vai_tro] || item.vai_tro }}</v-chip>
+            <span class="role-badge" :style="ROLE_STYLES[item.vai_tro] || {}">{{ ROLE_LABELS[item.vai_tro] || item.vai_tro }}</span>
           </template>
           <template #item.active="{ item }">
             <v-chip :color="item.active ? 'success' : 'grey'" size="small" :style="item.active ? { background: '#D1FAE5' } : {}">{{ item.active ? 'Hoạt động' : 'Đã khóa' }}</v-chip>
@@ -279,5 +280,14 @@ onMounted(() => {
 .edit-btn:hover {
   background: #DBEAFE !important;
   border-radius: 8px !important;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  white-space: nowrap;
 }
 </style>
