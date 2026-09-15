@@ -32,7 +32,7 @@ Quy trình tạm ứng tài chính công đoàn (mã số **ĐHYD-CĐ/QT.02**) h
 - Người đề nghị **viết tay** hoặc in Giấy đề nghị tạm ứng (C42-HD), bảng dự trù kinh phí (HSTU-01/02), danh sách ký nhận (HSTU-03).
 - Hồ sơ giấy được **chuyển tay** qua 5 người (Người đề nghị → Chuyên viên VPCĐ → Kế toán → Chủ tịch CĐCS → Thủ quỹ).
 - Theo dõi tiến độ bằng **sổ tay ghi chép**, không có hệ thống tra cứu.
-- Thủ quỹ lập Phiếu chi (C41-BB) bằng **giấy viết tay**, dễ sai sót.
+- Thủ quỹ **in** Phiếu chi (C41-BB) từ mẫu giấy, điền thông tin thủ công, dễ sai sót.
 - Lưu trữ **bản giấy** trong tủ hồ sơ, khó tìm kiếm, rủi ro mất mát.
 
 ### 1.2. Điểm nghẽn
@@ -48,7 +48,7 @@ Quy trình tạm ứng tài chính công đoàn (mã số **ĐHYD-CĐ/QT.02**) h
 
 ### 1.3. Giải pháp số hóa
 
-Hệ thống **thay thế toàn bộ quy trình giấy** bằng luồng xử lý trực tuyến:
+Hệ thống **số hóa toàn bộ quy trình** xử lý trực tuyến, đồng thời hỗ trợ **in ấn biểu mẫu giấy** khi cần lưu trữ bản cứng theo quy định:
 
 ```
 Tạo hồ sơ → Tiếp nhận → Kiểm tra → Phê duyệt → Chi tiền → Lưu trữ
@@ -59,6 +59,7 @@ Tạo hồ sơ → Tiếp nhận → Kiểm tra → Phê duyệt → Chi tiền 
 - **Thông báo** gửi ngay khi hồ sơ cần xử lý
 - **SLA** cảnh báo khi sắp hết hạn
 - **AI** hỗ trợ kiểm tra, tóm tắt, gợi ý nhận xét
+- **Xuất biểu mẫu** — hệ thống tự động điền dữ liệu vào biểu mẫu, hỗ trợ in bản giấy khi cần lưu trữ theo quy định
 
 > Chi tiết quy trình: [`docs/quy-trinh-tam-ung.md`](docs/quy-trinh-tam-ung.md)
 
@@ -293,13 +294,17 @@ Hệ thống tích hợp **4 chức năng AI** sử dụng Google Gemini, tất 
 | Tra cứu hồ sơ cũ | 30-60 phút (lục tủ hồ sơ) | < 1 phút (tìm kiếm online) | **~98%** |
 | Tổng thời gian quy trình | 15-20 ngày (thực tế) | 3-5 ngày (SLA 11 ngày tối đa) | **~70%** |
 
-### 8.2. Giảm giấy tờ
+### 8.2. Giảm giấy tờ và công sức soạn thảo
 
-| Hạng mục | Trước | Sau | Giảm |
-|----------|-------|-----|------|
-| Số tờ giấy/hồ sơ | 5-8 tờ (C42-HD, dự trù, ký nhận, phiếu chi, lịch sử) | 0 tờ (100% điện tử) | **100%** |
-| Ước tính với ~100 hồ sơ/năm | 500-800 tờ giấy/năm | 0 | **100%** |
-| Không gian lưu trữ | 1-2 tủ hồ sơ (10 năm tích lũy) | Cloud database | **100%** |
+| Hạng mục | Trước | Sau | Cải thiện |
+|----------|-------|-----|-----------|
+| Soạn biểu mẫu | Điền tay hoặc soạn từ đầu trên máy | Hệ thống tự điền dữ liệu, chỉ cần in | **~90%** công sức soạn thảo |
+| Sai sót khi điền | Thường xuyên (sai số, thiếu thông tin) | Tự động tính toán, validation bắt buộc | **~95%** sai sót |
+| Số lần in/photo | 2-3 bản mỗi biểu mẫu (nháp + chính thức) | In 1 lần bản chính thức từ hệ thống | **~60%** giấy in |
+| Lưu trữ điện tử | Chỉ bản giấy, phải scan riêng | Lưu sẵn trên hệ thống, in bản giấy khi cần | Đáp ứng lưu trữ kép (giấy + điện tử) |
+| Tra cứu hồ sơ | Lục tủ hồ sơ 30-60 phút | Tìm kiếm online < 1 phút | **~98%** thời gian |
+
+> **Lưu ý:** Bản giấy vẫn cần thiết để ký duyệt và lưu trữ theo quy định. Hệ thống hỗ trợ tạo và in biểu mẫu với dữ liệu đã được điền sẵn, giảm thiểu công sức soạn thảo và sai sót.
 
 ### 8.3. Giảm sai sót
 
@@ -317,7 +322,7 @@ Hệ thống tích hợp **4 chức năng AI** sử dụng Google Gemini, tất 
 | Chỉ số | Ước tính |
 |--------|----------|
 | Thời gian xử lý mỗi hồ sơ | Giảm **~70%** (từ 15-20 ngày xuống 3-5 ngày) |
-| Giấy tờ in ấn | Giảm **100%** (hoàn toàn điện tử) |
+| Công sức soạn biểu mẫu | Giảm **~90%** (hệ thống tự điền, chỉ cần in bản chính thức) |
 | Sai sót tính toán | Giảm **~100%** (tự động tính) |
 | Minh bạch quy trình | **Toàn diện** — lịch sử xử lý ghi nhận chi tiết ai/khi nào/thao tác gì |
 | Khả năng tra cứu | **Tức thì** — tìm kiếm, lọc, báo cáo online |
