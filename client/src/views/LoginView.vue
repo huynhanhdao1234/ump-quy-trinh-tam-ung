@@ -13,6 +13,14 @@ const showPassword = ref(false)
 const errorMsg = ref('')
 const loading = ref(false)
 
+const DEMO_STYLES = {
+  'Chủ tịch CĐCS': { background: '#EDE9FE', border: '1px solid #C4B5FD' },
+  'Kế toán': { background: '#FEF3C7', border: '1px solid #FCD34D' },
+  'Chuyên viên': { background: '#DBEAFE', border: '1px solid #93C5FD' },
+  'Thủ quỹ': { background: '#CCFBF1', border: '1px solid #5EEAD4' },
+  'Người đề nghị': { background: '#D1FAE5', border: '1px solid #6EE7B7' },
+}
+
 function fillDemo(account) {
   email.value = account.email
   password.value = account.password
@@ -77,7 +85,7 @@ const steps = [
 
           <!-- Right panel — login form -->
           <v-col cols="12" md="6" class="d-flex align-center justify-center right-panel">
-            <div style="width: 100%; max-width: 400px" class="px-6 px-md-0">
+            <div style="width: 100%; max-width: 420px" class="px-6 px-md-0">
               <div class="d-md-none text-center mb-8">
                 <v-avatar color="primary" size="56" class="mb-3">
                   <v-icon size="32" color="white">mdi-school</v-icon>
@@ -86,58 +94,57 @@ const steps = [
                 <p class="text-body-2 text-medium-emphasis">CĐCS ĐH Y Dược TP.HCM</p>
               </div>
 
-              <h2 class="text-h5 font-weight-bold mb-1">Đăng nhập</h2>
-              <p class="text-body-2 text-medium-emphasis mb-6">Nhập thông tin tài khoản để truy cập hệ thống</p>
+              <div class="login-card">
+                <h2 class="text-h5 font-weight-bold mb-1 login-title">Đăng nhập</h2>
+                <p class="text-body-2 login-subtitle mb-6">Nhập thông tin tài khoản để truy cập hệ thống</p>
 
-              <v-alert v-if="errorMsg" type="error" density="compact" variant="tonal" class="mb-4" closable @click:close="errorMsg = ''">
-                {{ errorMsg }}
-              </v-alert>
+                <v-alert v-if="errorMsg" type="error" density="compact" variant="tonal" class="mb-4" closable @click:close="errorMsg = ''">
+                  {{ errorMsg }}
+                </v-alert>
 
-              <v-form @submit.prevent="handleLogin">
-                <v-text-field
-                  v-model="email"
-                  label="Email"
-                  type="email"
-                  prepend-inner-icon="mdi-email-outline"
-                  autocomplete="email"
-                  class="mb-1"
-                />
-                <v-text-field
-                  v-model="password"
-                  label="Mật khẩu"
-                  :type="showPassword ? 'text' : 'password'"
-                  prepend-inner-icon="mdi-lock-outline"
-                  :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-                  autocomplete="current-password"
-                  class="mb-4"
-                  @click:append-inner="showPassword = !showPassword"
-                />
-                <v-btn
-                  type="submit"
-                  color="primary"
-                  size="large"
-                  block
-                  :loading="loading"
-                  class="mb-6"
-                >
-                  Đăng nhập
-                </v-btn>
-              </v-form>
-
-              <div class="demo-section pa-4 rounded-lg">
-                <p class="text-body-2 font-weight-medium mb-3">Tài khoản demo</p>
-                <div class="d-flex flex-wrap ga-2">
-                  <v-chip
-                    v-for="acc in DEMO_ACCOUNTS"
-                    :key="acc.email"
-                    :color="acc.color"
-                    variant="tonal"
-                    size="small"
-                    class="cursor-pointer"
-                    @click="fillDemo(acc)"
+                <v-form @submit.prevent="handleLogin" class="login-form">
+                  <v-text-field
+                    v-model="email"
+                    label="Email"
+                    type="email"
+                    prepend-inner-icon="mdi-email-outline"
+                    autocomplete="email"
+                    class="mb-1"
+                  />
+                  <v-text-field
+                    v-model="password"
+                    label="Mật khẩu"
+                    :type="showPassword ? 'text' : 'password'"
+                    prepend-inner-icon="mdi-lock-outline"
+                    :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
+                    autocomplete="current-password"
+                    class="mb-4"
+                    @click:append-inner="showPassword = !showPassword"
+                  />
+                  <v-btn
+                    type="submit"
+                    size="large"
+                    block
+                    :loading="loading"
+                    class="login-btn mb-6"
                   >
-                    {{ acc.role }}
-                  </v-chip>
+                    Đăng nhập
+                  </v-btn>
+                </v-form>
+
+                <div class="demo-section">
+                  <p class="demo-title mb-3">Tài khoản demo</p>
+                  <div class="d-flex flex-wrap ga-2">
+                    <span
+                      v-for="acc in DEMO_ACCOUNTS"
+                      :key="acc.email"
+                      class="demo-badge"
+                      :style="DEMO_STYLES[acc.role] || {}"
+                      @click="fillDemo(acc)"
+                    >
+                      {{ acc.role }}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -150,12 +157,12 @@ const steps = [
 
 <style scoped>
 .login-bg {
-  background: #F4F6F8;
+  background: #EDF2F7;
   min-height: 100vh;
 }
 
 .left-panel {
-  background: linear-gradient(160deg, #1B3A5C 0%, #0D2137 60%, #00796B 100%);
+  background: linear-gradient(135deg, #1A73E8 0%, #0A2E5C 100%);
   position: relative;
   overflow: hidden;
 }
@@ -165,24 +172,91 @@ const steps = [
   top: -40%; right: -30%;
   width: 600px; height: 600px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.03);
+  background: rgba(255,255,255,0.04);
 }
 
 .brand-icon {
   width: 88px; height: 88px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.12);
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
 .right-panel {
-  background: #fff;
+  background: #F8FAFC;
+}
+
+.login-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 40px;
+}
+
+.login-title {
+  color: #0A2E5C;
+}
+.login-subtitle {
+  color: #64748B;
+}
+
+.login-form :deep(.v-field) {
+  background: #F5F8FC !important;
+  border-radius: 10px !important;
+}
+.login-form :deep(.v-field--variant-outlined .v-field__outline) {
+  --v-field-border-opacity: 1;
+  color: #D1D9E6 !important;
+}
+.login-form :deep(.v-field--focused .v-field__outline) {
+  color: #3B82F6 !important;
+}
+.login-form :deep(.v-field--focused) {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+.login-form :deep(.v-field .v-icon) {
+  color: #3B82F6 !important;
+}
+
+.login-btn {
+  background: linear-gradient(135deg, #1A73E8, #2563EB) !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  border-radius: 10px !important;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.login-btn:hover {
+  background: linear-gradient(135deg, #1557B0, #1A73E8) !important;
+  box-shadow: 0 4px 15px rgba(26, 115, 232, 0.35) !important;
 }
 
 .demo-section {
-  background: #F4F6F8;
+  background: #EBF5FF;
+  border-radius: 12px;
+  border: 1px solid #DBEAFE;
+  padding: 16px;
+}
+.demo-title {
+  color: #0A2E5C;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.demo-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: filter 0.15s;
+  white-space: nowrap;
+}
+.demo-badge:hover {
+  filter: brightness(0.93);
 }
 
 .workflow-steps {
@@ -212,9 +286,7 @@ const steps = [
 }
 .step-line {
   width: 12px; height: 2px;
-  background: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.3);
   flex-shrink: 0;
 }
-
-.cursor-pointer { cursor: pointer; }
 </style>
