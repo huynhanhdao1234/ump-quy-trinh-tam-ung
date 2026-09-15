@@ -66,7 +66,7 @@ function formatDate(dt) {
       </v-btn>
     </div>
 
-    <v-card>
+    <v-card class="requests-card">
       <v-card-text class="pb-0">
         <v-row>
           <v-col cols="12" sm="6" md="4">
@@ -77,6 +77,7 @@ function formatDate(dt) {
               clearable
               hide-details
               density="compact"
+              class="search-input"
             />
           </v-col>
           <v-col cols="12" sm="6" md="3">
@@ -87,13 +88,14 @@ function formatDate(dt) {
               hide-details
               density="compact"
               clearable
+              class="status-select"
             />
           </v-col>
         </v-row>
       </v-card-text>
 
       <v-card-text class="pa-0 pt-2">
-        <v-table density="comfortable" hover v-if="!loading">
+        <v-table density="comfortable" hover v-if="!loading" class="requests-table">
           <thead>
             <tr>
               <th>Mã hồ sơ</th>
@@ -139,4 +141,34 @@ function formatDate(dt) {
 
 <style scoped>
 .cursor-pointer { cursor: pointer; }
+
+.requests-card {
+  background: #FFFFFF !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+.search-input :deep(.v-field) {
+  background: #F8FAFC;
+}
+.search-input :deep(.v-field--focused) {
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.15);
+}
+
+.status-select :deep(.v-field) {
+  background: #F8FAFC;
+}
+
+.requests-table thead tr {
+  background: #EBF5FF !important;
+}
+.requests-table thead th {
+  background: transparent !important;
+}
+.requests-table tbody tr:nth-child(even) {
+  background: #FAFCFF;
+}
+.requests-table tbody tr:hover {
+  background: #F0F7FF !important;
+}
 </style>
