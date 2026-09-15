@@ -57,7 +57,7 @@ Tạo hồ sơ → Tiếp nhận → Kiểm tra → Phê duyệt → Chi tiền 
 
 - **Mỗi bước** tự động chuyển đến đúng người xử lý tiếp theo
 - **Thông báo** gửi ngay khi hồ sơ cần xử lý
-- **SLA** cảnh báo khi sắp hết hạn
+- **SLA** cấu hình thời hạn xử lý từng bước (Chủ tịch quản lý)
 - **AI** hỗ trợ kiểm tra, tóm tắt, gợi ý nhận xét
 - **Xuất biểu mẫu** — hệ thống tự động điền dữ liệu vào biểu mẫu, hỗ trợ in bản giấy khi cần lưu trữ theo quy định
 
@@ -200,11 +200,11 @@ Hệ thống sử dụng **PostgreSQL triggers** để tự động hóa ở t�
 | `trigger_ghi_lich_su` | Hồ sơ thay đổi | Ghi lịch sử xử lý (ai, khi nào, thao tác gì) |
 | `trigger_cap_nhat_counter` | Tạo hồ sơ/phiếu chi mới | Tự sinh mã hồ sơ (TU-2026-0001) và mã phiếu chi (PC-2026-0001) |
 
-### 5.3. Theo dõi SLA
+### 5.3. Cấu hình SLA
 
-- Mỗi bước có **thời hạn tối đa** (cấu hình bởi Chủ tịch CĐCS)
-- Dashboard hiển thị **hồ sơ sắp/đã quá hạn**
-- Tổng thời gian xử lý tối đa: **11 ngày làm việc**
+- Mỗi bước có **thời hạn tối đa** (cấu hình bởi Chủ tịch CĐCS trong tab Quản trị)
+- Tổng thời gian xử lý tối đa: **11 ngày làm việc** (mặc định)
+- Chủ tịch có thể điều chỉnh số ngày cho từng bước theo nhu cầu thực tế
 
 ---
 
@@ -314,7 +314,7 @@ Hệ thống tích hợp **4 chức năng AI** sử dụng Google Gemini, tất 
 | Tổng dự trù không khớp | Thỉnh thoảng | Không xảy ra | Tự động cộng |
 | Thiếu thông tin bắt buộc | Thường xuyên | Không xảy ra | Validation bắt buộc |
 | Mất/thất lạc hồ sơ | Rủi ro cao | Không xảy ra | Lưu trữ cloud |
-| Quên xử lý hồ sơ | Thỉnh thoảng | Không xảy ra | Thông báo + SLA |
+| Quên xử lý hồ sơ | Thỉnh thoảng | Giảm đáng kể | Thông báo tự động khi có hồ sơ cần xử lý |
 | Ghi nhầm số tiền phiếu chi | Có thể | Không xảy ra | Tự động điền từ hồ sơ |
 
 ### 8.4. Tóm tắt lợi ích
