@@ -89,22 +89,22 @@ const recentRequests = computed(() => requests.value.slice(0, 8))
 
     <v-row dense class="mb-2">
       <v-col cols="12" sm="6" md="3">
-        <StatsCard title="Tổng hồ sơ" :value="stats.total" icon="mdi-file-document-multiple" color="primary" />
+        <StatsCard title="Tổng hồ sơ" :value="stats.total" icon="mdi-file-document-multiple" color="primary" gradient="linear-gradient(135deg, #1A73E8, #3B82F6)" />
       </v-col>
       <v-col cols="12" sm="6" md="3">
-        <StatsCard title="Chờ xử lý" :value="stats.pending" icon="mdi-clock-outline" color="warning" />
+        <StatsCard title="Chờ xử lý" :value="stats.pending" icon="mdi-clock-outline" color="warning" gradient="linear-gradient(135deg, #F97316, #FB923C)" />
       </v-col>
       <v-col cols="12" sm="6" md="3">
-        <StatsCard title="Đã duyệt" :value="stats.approved" icon="mdi-check-circle" color="success" />
+        <StatsCard title="Đã duyệt" :value="stats.approved" icon="mdi-check-circle" color="success" gradient="linear-gradient(135deg, #10B981, #34D399)" />
       </v-col>
       <v-col cols="12" sm="6" md="3">
-        <StatsCard title="Tổng chi" :value="formatCurrency(stats.totalAmount) + 'đ'" icon="mdi-cash-multiple" color="info" />
+        <StatsCard title="Tổng chi" :value="formatCurrency(stats.totalAmount) + 'đ'" icon="mdi-cash-multiple" color="info" gradient="linear-gradient(135deg, #0F172A, #1E3A5F)" />
       </v-col>
     </v-row>
 
     <v-row dense>
       <v-col cols="12" md="4">
-        <v-card>
+        <v-card class="dashboard-card">
           <v-card-title>Theo trạng thái</v-card-title>
           <v-card-text>
             <div v-if="statusCounts.length > 0" style="height: 220px">
@@ -126,14 +126,14 @@ const recentRequests = computed(() => requests.value.slice(0, 8))
       </v-col>
 
       <v-col cols="12" md="8">
-        <v-card>
+        <v-card class="dashboard-card">
           <v-card-title class="d-flex align-center">
             <span>Hồ sơ gần đây</span>
             <v-spacer />
             <v-btn variant="text" color="primary" size="small" to="/requests">Xem tất cả</v-btn>
           </v-card-title>
           <v-card-text class="pa-0">
-            <v-table density="comfortable" hover v-if="!loading">
+            <v-table density="comfortable" hover v-if="!loading" class="dashboard-table">
               <thead>
                 <tr>
                   <th>Mã hồ sơ</th>
@@ -173,4 +173,23 @@ const recentRequests = computed(() => requests.value.slice(0, 8))
 
 <style scoped>
 .cursor-pointer { cursor: pointer; }
+
+.dashboard-card {
+  background: #FFFFFF !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+.dashboard-table thead tr {
+  background: #EBF5FF !important;
+}
+.dashboard-table thead th {
+  background: transparent !important;
+}
+.dashboard-table tbody tr:nth-child(even) {
+  background: #FAFCFF;
+}
+.dashboard-table tbody tr:hover {
+  background: #F0F7FF !important;
+}
 </style>
