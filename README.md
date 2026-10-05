@@ -29,10 +29,9 @@
 
 Quy trình tạm ứng tài chính công đoàn (mã số **ĐHYD-CĐ/QT.02**) hiện đang thực hiện chủ yếu bằng **giấy tờ thủ công**:
 
-- Người đề nghị tự soạn hoặc điền tay các biểu mẫu: Giấy đề nghị tạm ứng (C42-HD), bảng dự trù kinh phí (HSTU-01/02), danh sách ký nhận (HSTU-03).
+- Người đề nghị tự soạn các biểu mẫu: Giấy đề nghị tạm ứng (C42-HD), bảng dự trù kinh phí (HSTU-01/02), danh sách ký nhận (HSTU-03).
 - Hồ sơ giấy được **chuyển tay** qua 5 người (Người đề nghị → Chuyên viên VPCĐ → Kế toán → Chủ tịch CĐCS → Thủ quỹ).
 - Theo dõi tiến độ qua **điện thoại hoặc hỏi trực tiếp**, không có hệ thống tra cứu tập trung.
-- Thủ quỹ **in** Phiếu chi (C41-BB) từ mẫu giấy, tự điền thông tin, dễ nhầm số liệu.
 - Kế toán phải **đối chiếu thủ công** từng dòng dự trù với số tiền đề nghị.
 - Lưu trữ **chỉ bản giấy** trong tủ hồ sơ, tra cứu mất thời gian, không có bản điện tử dự phòng.
 
@@ -40,7 +39,7 @@ Quy trình tạm ứng tài chính công đoàn (mã số **ĐHYD-CĐ/QT.02**) h
 
 | # | Điểm nghẽn | Hiện trạng | Hệ quả |
 |---|-----------|-----------|--------|
-| 1 | **Soạn biểu mẫu thủ công** | Người đề nghị tự soạn từ đầu hoặc điền tay vào mẫu in sẵn | Tốn thời gian, dễ thiếu thông tin bắt buộc, tính toán sai thành tiền |
+| 1 | **Soạn biểu mẫu thủ công** | Người đề nghị tự soạn bằng cách đánh máy | Tốn thời gian, dễ thiếu thông tin bắt buộc, tính toán sai thành tiền |
 | 2 | **Chuyển hồ sơ giấy qua nhiều người** | Hồ sơ phải đi qua 5 người, chuyển bằng tay | Mất 2-3 ngày chỉ để đến đúng người xử lý, hồ sơ có thể nằm trên bàn chờ |
 | 3 | **Không theo dõi được tiến độ** | Muốn biết hồ sơ đến đâu phải gọi điện hoặc đi hỏi từng người | Người đề nghị bị động, không biết ai đang giữ hồ sơ |
 | 4 | **Đối chiếu số liệu thủ công** | Kế toán kiểm tra từng dòng dự trù, đối chiếu tổng bằng tay | Dễ sai sót, mất thời gian kiểm tra mỗi hồ sơ |
@@ -71,18 +70,15 @@ Tạo hồ sơ → Tiếp nhận → Kiểm tra → Phê duyệt → Chi tiền 
 
 ## 2. Biểu mẫu điện tử đã xây dựng và số hóa
 
-Hệ thống đã số hóa **5 biểu mẫu giấy chính thức** theo quy trình ĐHYD-CĐ/QT.02 và bổ sung **3 biểu mẫu nội bộ**:
+Hệ thống đã số hóa **5 biểu mẫu giấy chính thức** theo quy trình ĐHYD-CĐ/QT.02:
 
-| # | Mã biểu mẫu | Tên biểu mẫu | Bước | Người thực hiện | Loại |
-|---|-------------|--------------|------|-----------------|------|
-| 1 | C42-HD | Giấy đề nghị tạm ứng | 1 | Người đề nghị | Chính thức |
-| 2 | HSTU-01 | Dự trù kinh phí hoạt động tháng | 1 | Người đề nghị | Chính thức |
-| 3 | HSTU-02 | Dự trù kinh phí phong trào/chuyên đề | 1 | Người đề nghị | Chính thức |
-| 4 | HSTU-03 | Danh sách ký nhận | 1 | Người đề nghị | Chính thức |
-| 5 | C41-BB | Phiếu chi | 5 | Thủ quỹ | Chính thức |
-| 6 | — | Phiếu tiếp nhận hồ sơ | 2 | Chuyên viên VPCĐ | Bổ sung |
-| 7 | — | Phiếu kiểm tra hợp lệ | 3 | Phụ trách Kế toán | Bổ sung |
-| 8 | — | Phiếu phê duyệt | 4 | Chủ tịch CĐCS | Bổ sung |
+| STT | Mã biểu mẫu | Tên biểu mẫu | Bước | Người thực hiện |
+|-----|-------------|--------------|------|-----------------|
+| 1 | C42-HD | Giấy đề nghị tạm ứng | 1 | Người đề nghị |
+| 2 | HSTU-01 | Dự trù kinh phí hoạt động tháng | 1 | Người đề nghị |
+| 3 | HSTU-02 | Dự trù kinh phí phong trào/chuyên đề | 1 | Người đề nghị |
+| 4 | HSTU-03 | Danh sách ký nhận | 1 | Người đề nghị |
+| 5 | C41-BB | Phiếu chi | 5 | Thủ quỹ |
 
 **Cải tiến so với biểu mẫu giấy:**
 - Tự động tính thành tiền, tổng cộng, số tiền bằng chữ
@@ -118,7 +114,7 @@ Hệ thống **tự động tạo dữ liệu mẫu** khi khởi tạo database,
 
 | Loại | Số lượng | Chi tiết |
 |------|----------|---------|
-| Hồ sơ mẫu | 12 | Đại diện **9 trạng thái** khác nhau trong quy trình |
+| Hồ sơ mẫu | 11 | Đại diện **9 trạng thái** khác nhau trong quy trình |
 | Dự trù kinh phí | ~40 dòng | Đính kèm trong các hồ sơ |
 | Danh sách ký nhận | ~25 dòng | Đính kèm trong các hồ sơ |
 | Phiếu chi C41-BB | 3 | Cho các hồ sơ đã chi/hoàn tất |
@@ -296,7 +292,7 @@ Hệ thống tích hợp **4 chức năng AI** sử dụng Google Gemini, tất 
 | Kiểm tra dự trù kinh phí | 30-60 phút/hồ sơ (tính tay) | 5-10 phút (AI hỗ trợ + tự động tính) | **~80%** |
 | Lập phiếu chi C41-BB | 15-20 phút (viết tay) | 2-3 phút (tự động điền) | **~85%** |
 | Tra cứu hồ sơ cũ | 30-60 phút (lục tủ hồ sơ) | < 1 phút (tìm kiếm online) | **~98%** |
-| Tổng thời gian quy trình | 15-20 ngày (thực tế) | 3-5 ngày (SLA 11 ngày tối đa) | **~70%** |
+| Tổng thời gian quy trình | 7-10 ngày (thực tế) | 3-5 ngày (SLA 11 ngày tối đa) | **~70%** |
 
 ### 8.2. Giảm giấy tờ và công sức soạn thảo
 
@@ -325,7 +321,7 @@ Hệ thống tích hợp **4 chức năng AI** sử dụng Google Gemini, tất 
 
 | Chỉ số | Ước tính |
 |--------|----------|
-| Thời gian xử lý mỗi hồ sơ | Giảm **~70%** (từ 15-20 ngày xuống 3-5 ngày) |
+| Thời gian xử lý mỗi hồ sơ | Giảm **~70%** (từ 7-10 ngày xuống 3-5 ngày) |
 | Công sức soạn biểu mẫu | Giảm **~90%** (hệ thống tự điền, chỉ cần in bản chính thức) |
 | Sai sót tính toán | Giảm **~100%** (tự động tính) |
 | Minh bạch quy trình | **Toàn diện** — lịch sử xử lý ghi nhận chi tiết ai/khi nào/thao tác gì |
