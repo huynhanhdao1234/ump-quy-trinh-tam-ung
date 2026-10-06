@@ -1,16 +1,28 @@
 const { Router } = require('express');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { authenticate } = require('../middleware/auth');
 
 const router = Router();
 router.use(authenticate);
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const AI_MODEL = 'nvidia/llama-3.3-nemotron-ultra-253b:free';
 
-function getModel() {
-  if (!GEMINI_API_KEY) throw new Error('GEMINI_API_KEY chưa được cấu hình');
-  const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-  return genAI.getGenerativeModel({ model: 'gemini-3.6-flash' });
+async function chatCompletion(messages) {
+  if (!OPENROUTER_API_KEY) throw new Error('OPENROUTER_API_KEY chưa được cấu hình');
+  const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ model: AI_MODEL, messages }),
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`OpenRouter error ${res.status}: ${err}`);
+  }
+  const data = await res.json();
+  return data.choices[0].message.content;
 }
 
 const PROCESS_CONTEXT = `Bạn là trợ lý AI của Hệ thống Quản lý Tạm ứng Tài chính Công đoàn — CĐCS Đại học Y Dược TP.HCM.
@@ -33,7 +45,6 @@ Chủ tịch có thể: phê duyệt, từ chối, hoặc yêu cầu bổ sung h
 router.post('/summarize', async (req, res) => {
   try {
     const { request, estimates, signList, history } = req.body;
-    const model = getModel();
 
     const prompt = `${PROCESS_CONTEXT}
 
@@ -58,8 +69,7 @@ ${(history || []).map(h => `- ${h.hanh_dong} bởi ${h.ten_nguoi_xu_ly}${h.ghi_c
 
 Tóm tắt:`;
 
-    const result = await model.generateContent(prompt);
-    const summary = result.response.text();
+    const summary = await chatCompletion([{ role: 'user', content: prompt }]);
     res.json({ summary });
   } catch (err) {
     console.error('AI summarize error:', err);
@@ -71,7 +81,6 @@ Tóm tắt:`;
 router.post('/check', async (req, res) => {
   try {
     const { request, estimates, signList } = req.body;
-    const model = getModel();
 
     const prompt = `${PROCESS_CONTEXT}
 
@@ -102,10 +111,9 @@ Kiểm tra các tiêu chí:
 Trả về CHÍNH XÁC JSON (không markdown, không giải thích thêm):
 [{"status": "ok|warning|error", "message": "Mô tả ngắn gọn kết quả kiểm tra"}]`;
 
-    const result = await model.generateContent(prompt);
-    let text = result.response.text().trim();
-    text = text.replace(/^```json\s*/i, '').replace(/\s*```$/i, '');
-    const checks = JSON.parse(text);
+    const text = await chatCompletion([{ role: 'user', content: prompt }]);
+    const cleaned = text.trim().replace(/^```json\s*/i, '').replace(/\s*```$/i, '');
+    const checks = JSON.parse(cleaned);
     res.json({ checks });
   } catch (err) {
     console.error('AI check error:', err);
@@ -121,7 +129,6 @@ Trả về CHÍNH XÁC JSON (không markdown, không giải thích thêm):
 router.post('/draft-comment', async (req, res) => {
   try {
     const { request, action, context } = req.body;
-    const model = getModel();
 
     const actionLabels = {
       tiep_nhan: 'tiếp nhận hồ sơ',
@@ -146,9 +153,8 @@ ${context ? `- Thông tin thêm: ${context}` : ''}
 
 Hãy viết một nhận xét ngắn gọn (1-2 câu), chuyên nghiệp, phù hợp với hành động "${actionLabels[action] || action}". Chỉ trả về nội dung nhận xét, không giải thích thêm.`;
 
-    const result = await model.generateContent(prompt);
-    const comment = result.response.text().trim();
-    res.json({ comment });
+    const comment = await chatCompletion([{ role: 'user', content: prompt }]);
+    res.json({ comment: comment.trim() });
   } catch (err) {
     console.error('AI draft-comment error:', err);
     res.status(500).json({ error: err.message || 'Lỗi khi tạo nhận xét' });
@@ -159,27 +165,17 @@ Hãy viết một nhận xét ngắn gọn (1-2 câu), chuyên nghiệp, phù h�
 router.post('/chat', async (req, res) => {
   try {
     const { message, history } = req.body;
-    const model = getModel();
 
-    const chat = model.startChat({
-      history: [
-        {
-          role: 'user',
-          parts: [{ text: 'Bạn là ai?' }],
-        },
-        {
-          role: 'model',
-          parts: [{ text: `${PROCESS_CONTEXT}\n\nTôi là trợ lý AI của Hệ thống Quản lý Tạm ứng Tài chính Công đoàn. Tôi có thể giúp bạn tra cứu quy trình, giải đáp thắc mắc về tạm ứng tài chính, và hướng dẫn sử dụng hệ thống. Hãy hỏi tôi bất cứ điều gì!` }],
-        },
-        ...(history || []).map(h => ({
-          role: h.role === 'user' ? 'user' : 'model',
-          parts: [{ text: h.content }],
-        })),
-      ],
-    });
+    const messages = [
+      { role: 'system', content: PROCESS_CONTEXT + '\n\nTôi là trợ lý AI của Hệ thống Quản lý Tạm ứng Tài chính Công đoàn. Tôi có thể giúp bạn tra cứu quy trình, giải đáp thắc mắc về tạm ứng tài chính, và hướng dẫn sử dụng hệ thống.' },
+      ...(history || []).map(h => ({
+        role: h.role === 'user' ? 'user' : 'assistant',
+        content: h.content,
+      })),
+      { role: 'user', content: message },
+    ];
 
-    const result = await chat.sendMessage(message);
-    const reply = result.response.text();
+    const reply = await chatCompletion(messages);
     res.json({ reply });
   } catch (err) {
     console.error('AI chat error:', err);
