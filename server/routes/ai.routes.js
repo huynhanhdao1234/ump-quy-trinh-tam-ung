@@ -5,7 +5,7 @@ const router = Router();
 router.use(authenticate);
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
-const AI_MODEL = 'nvidia/llama-3.3-nemotron-ultra-253b:free';
+const AI_MODEL = 'nvidia/nemotron-3-ultra-550b-a55b:free';
 
 async function chatCompletion(messages) {
   if (!OPENROUTER_API_KEY) throw new Error('OPENROUTER_API_KEY chưa được cấu hình');
