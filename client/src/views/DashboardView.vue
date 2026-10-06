@@ -76,7 +76,27 @@ const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    legend: { position: 'bottom', labels: { boxWidth: 12, padding: 10, font: { size: 11 } } },
+    legend: { display: false },
+  },
+}
+
+const sliceCountLabels = {
+  id: 'sliceCountLabels',
+  afterDatasetsDraw(chart) {
+    const { ctx } = chart
+    const values = chart.data.datasets[0].data
+    ctx.save()
+    ctx.font = 'bold 13px Roboto, sans-serif'
+    ctx.fillStyle = '#fff'
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    chart.getDatasetMeta(0).data.forEach((arc, i) => {
+      // Skip slices too thin to hold a number legibly.
+      if (!values[i] || arc.endAngle - arc.startAngle < 0.3) return
+      const { x, y } = arc.tooltipPosition()
+      ctx.fillText(values[i], x, y)
+    })
+    ctx.restore()
   },
 }
 
@@ -108,7 +128,7 @@ const recentRequests = computed(() => requests.value.slice(0, 8))
           <v-card-title>Theo trạng thái</v-card-title>
           <v-card-text>
             <div v-if="statusCounts.length > 0" style="height: 220px">
-              <Doughnut :data="chartData" :options="chartOptions" />
+              <Doughnut :data="chartData" :options="chartOptions" :plugins="[sliceCountLabels]" />
             </div>
             <v-list density="compact" class="mt-2">
               <v-list-item v-for="s in statusCounts" :key="s.status">
