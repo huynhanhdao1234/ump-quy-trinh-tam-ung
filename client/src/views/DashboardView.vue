@@ -76,7 +76,7 @@ const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    legend: { display: false },
+    legend: { position: 'bottom', labels: { boxWidth: 12, padding: 10, font: { size: 11 } } },
   },
 }
 
@@ -127,20 +127,10 @@ const recentRequests = computed(() => requests.value.slice(0, 8))
         <v-card class="dashboard-card">
           <v-card-title>Theo trạng thái</v-card-title>
           <v-card-text>
-            <div v-if="statusCounts.length > 0" style="height: 220px">
+            <div v-if="statusCounts.length > 0" style="height: 300px">
               <Doughnut :data="chartData" :options="chartOptions" :plugins="[sliceCountLabels]" />
             </div>
-            <v-list density="compact" class="mt-2">
-              <v-list-item v-for="s in statusCounts" :key="s.status">
-                <template #prepend>
-                  <v-chip :color="s.color" size="x-small" variant="flat" class="mr-2">{{ s.count }}</v-chip>
-                </template>
-                <v-list-item-title class="text-body-2">{{ s.label }}</v-list-item-title>
-              </v-list-item>
-              <v-list-item v-if="statusCounts.length === 0">
-                <v-list-item-title class="text-body-2 text-medium-emphasis">Chưa có dữ liệu</v-list-item-title>
-              </v-list-item>
-            </v-list>
+            <div v-else class="text-body-2 text-medium-emphasis">Chưa có dữ liệu</div>
           </v-card-text>
         </v-card>
       </v-col>
