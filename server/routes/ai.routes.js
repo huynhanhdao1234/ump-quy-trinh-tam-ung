@@ -7,22 +7,40 @@ router.use(authenticate);
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 const AI_MODEL = 'nvidia/nemotron-3-ultra-550b-a55b:free';
 
+const FRIENDLY_ERRORS = {
+  401: 'Khóa AI không hợp lệ, vui lòng liên hệ quản trị viên',
+  402: 'Tài khoản AI đã hết hạn mức, vui lòng liên hệ quản trị viên',
+  429: 'AI đang quá tải hoặc đã hết lượt miễn phí, vui lòng thử lại sau ít phút',
+};
+
 async function chatCompletion(messages) {
   if (!OPENROUTER_API_KEY) throw new Error('OPENROUTER_API_KEY chưa được cấu hình');
-  const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ model: AI_MODEL, messages }),
-  });
+  let res;
+  try {
+    res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+        'Content-Type': 'application/json',
+        'X-Title': 'UMP Quan ly Tam ung',
+      },
+      body: JSON.stringify({ model: AI_MODEL, messages }),
+      signal: AbortSignal.timeout(60000),
+    });
+  } catch (err) {
+    console.error('OpenRouter network error:', err);
+    throw new Error(err.name === 'TimeoutError'
+      ? 'AI phản hồi quá lâu, vui lòng thử lại'
+      : 'Không kết nối được dịch vụ AI, vui lòng thử lại');
+  }
   if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`OpenRouter error ${res.status}: ${err}`);
+    console.error(`OpenRouter error ${res.status}:`, await res.text());
+    throw new Error(FRIENDLY_ERRORS[res.status] || 'Dịch vụ AI đang gặp sự cố, vui lòng thử lại');
   }
   const data = await res.json();
-  return data.choices[0].message.content;
+  const content = data.choices?.[0]?.message?.content?.trim();
+  if (!content) throw new Error('AI không trả về kết quả, vui lòng thử lại');
+  return content;
 }
 
 const PROCESS_CONTEXT = `Bạn là trợ lý AI của Hệ thống Quản lý Tạm ứng Tài chính Công đoàn — CĐCS Đại học Y Dược TP.HCM.
@@ -112,8 +130,7 @@ Trả về CHÍNH XÁC JSON (không markdown, không giải thích thêm):
 [{"status": "ok|warning|error", "message": "Mô tả ngắn gọn kết quả kiểm tra"}]`;
 
     const text = await chatCompletion([{ role: 'user', content: prompt }]);
-    const cleaned = text.trim().replace(/^```json\s*/i, '').replace(/\s*```$/i, '');
-    const checks = JSON.parse(cleaned);
+    const checks = JSON.parse(text.slice(text.indexOf('['), text.lastIndexOf(']') + 1));
     res.json({ checks });
   } catch (err) {
     console.error('AI check error:', err);
@@ -154,7 +171,7 @@ ${context ? `- Thông tin thêm: ${context}` : ''}
 Hãy viết một nhận xét ngắn gọn (1-2 câu), chuyên nghiệp, phù hợp với hành động "${actionLabels[action] || action}". Chỉ trả về nội dung nhận xét, không giải thích thêm.`;
 
     const comment = await chatCompletion([{ role: 'user', content: prompt }]);
-    res.json({ comment: comment.trim() });
+    res.json({ comment });
   } catch (err) {
     console.error('AI draft-comment error:', err);
     res.status(500).json({ error: err.message || 'Lỗi khi tạo nhận xét' });

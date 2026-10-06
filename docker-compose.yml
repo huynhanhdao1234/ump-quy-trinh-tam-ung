@@ -31,7 +31,7 @@ services:
       DB_USER: appuser
       DB_PASSWORD: change_me
       JWT_SECRET: ump-tam-ung-jwt-secret-change-in-production
-      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
       PORT: 3000
     volumes:
       - uploads_data:/app/uploads
